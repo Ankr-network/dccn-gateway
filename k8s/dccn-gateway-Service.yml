@@ -4,7 +4,6 @@ metadata:
   name: gateway
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-1:815280425737:certificate/4bea4956-ebd5-4de8-9f32-5ad52b139056
     # Only run SSL on the port named "https" below.
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
 spec:
