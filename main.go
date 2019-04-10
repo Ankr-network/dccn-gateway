@@ -50,12 +50,12 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 		return nil, err
 	}
 
-	err = gwtaskmgr.RegisterTaskMgrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
+	err = gwtaskmgr.RegisterAppMgrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
 	if err != nil {
 		return nil, err
 	}
 
-	err = gwtaskmgr.RegisterTaskMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
+	err = gwtaskmgr.RegisterAppMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
 	if err != nil {
 		return nil, err
 	}
