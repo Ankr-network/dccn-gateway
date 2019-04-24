@@ -96,6 +96,8 @@ func allowCORS(h http.Handler) http.Handler {
 				return
 			}
 		}
+
+		glog.Infof("new request for %s", r.URL.Path)
 		h.ServeHTTP(w, r)
 	})
 }
@@ -121,6 +123,7 @@ func Run(address string, opts ...runtime.ServeMuxOption) error {
 }
 
 func main() {
+	flag.Set("logtostderr", "true")
 	flag.Parse()
 	defer glog.Flush()
 
