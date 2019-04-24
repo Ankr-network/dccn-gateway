@@ -1,0 +1,17 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: gateway
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+        containers:
+        - name: app-dccn-gateway
+          image: 815280425737.dkr.ecr.us-west-2.amazonaws.com/dccn-gateway:feat
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 50051
