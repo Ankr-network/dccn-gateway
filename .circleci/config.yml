@@ -42,16 +42,16 @@ jobs:
             if [[ ($BRANCH_NAME == "develop") ]]
             then
               BRANCH_NAME="dev"
-              URL_BRANCH="client-stage.dccn.ankr.network:50051"
+              URL_BRANCH="client-stage.dccn.ankr.com:50051"
               K8S_CLUSTER="stage.hub"
             elif [[ ($BRANCH_NAME == "master") ]]
             then
               BRANCH_NAME="stage"
-              URL_BRANCH="client.dccn.ankr.network:50051"
+              URL_BRANCH="client.dccn.ankr.com:50051"
               K8S_CLUSTER="hub"
             else
               BRANCH_NAME="feat"
-              URL_BRANCH="client-dev.dccn.ankr.network:50051"
+              URL_BRANCH="client-dev.dccn.ankr.com:50051"
               K8S_CLUSTER="dev.hub"
             fi
             DOCKER_NAME="dccn-gateway"
