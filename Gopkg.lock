@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "5cdb42b986c2f943d4d923a3b69d29ae7f7a09ff"
+  revision = "3fc438a25003e407626e241bf2a32aac90a7855a"
 
 [[projects]]
   branch = "master"
@@ -57,7 +57,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d9403fe14e9ea0436e59be99b24c76517720c524d5649c3359224364e70252cd"
+  digest = "1:07c70ed7db30e61c8e28f5139a426deef24d6be14a16a679f2c38e89b1704475"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -69,24 +69,26 @@
     "trace",
   ]
   pruneopts = "UT"
-  revision = "afe8014c977f78fe2406743d9d32c8bd44d0542b"
+  revision = "4829fb13d2c62012c17688fa7f629f371014946d"
 
 [[projects]]
   branch = "master"
-  digest = "1:55565b142e38b7d00c39ce9a86fc70bbfa37c4f2f00d8ff2343f433c351db8e3"
+  digest = "1:157e5158a7f29d6633eed502880463aa43de3c36d451c7051591efd12f455ac8"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "953cdadca894cdc07be76fc99f95b40c28f06623"
+  revision = "a129542de9ae0895210abff9c95d67a1f33cb93d"
 
 [[projects]]
-  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
+  digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
   name = "golang.org/x/text"
   packages = [
     "collate",
     "collate/build",
     "internal/colltab",
     "internal/gen",
+    "internal/language",
+    "internal/language/compact",
     "internal/tag",
     "internal/triegen",
     "internal/ucd",
@@ -99,8 +101,8 @@
     "unicode/rangetable",
   ]
   pruneopts = "UT"
-  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
-  version = "v0.3.0"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
 
 [[projects]]
   branch = "master"
@@ -113,7 +115,7 @@
     "protobuf/field_mask",
   ]
   pruneopts = "UT"
-  revision = "e7d98fc518a78c9f8b5ee77be7b0b317475d89e1"
+  revision = "357c62f0e4bbba7e6cc403ae09edcf3e2b9028fe"
 
 [[projects]]
   digest = "1:707c3a5d10ed430ea767d73df122d9eb3dfb6312bbacc9f2e39204390686d1d0"
