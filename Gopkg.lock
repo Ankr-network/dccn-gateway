@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:cce8f9c939d50825e6213ac3d9467205c1683c962358af3b5697c579452c993e"
+  digest = "1:685f485d6f986938ca6d713d1db9aa9b476d830401d185743f550efecefbbb03"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
