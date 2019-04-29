@@ -2,8 +2,8 @@
 
 
 [[projects]]
-  branch = "develop"
-  digest = "1:685f485d6f986938ca6d713d1db9aa9b476d830401d185743f550efecefbbb03"
+  branch = "feature/swdev-220-swagger"
+  digest = "1:c2a40f2d438e2936e4511da9025195625f4c829b0bf25b3e3b267179582a6194"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "3fc438a25003e407626e241bf2a32aac90a7855a"
+  revision = "4f1bf0207e2a9dc6d30744affae8b74ca92e145d"
 
 [[projects]]
   branch = "master"
@@ -73,11 +73,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:157e5158a7f29d6633eed502880463aa43de3c36d451c7051591efd12f455ac8"
+  digest = "1:dcd2e9de31e20e01b156288ce4fc239498564295bdbb59d8aaf591af94778162"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "a129542de9ae0895210abff9c95d67a1f33cb93d"
+  revision = "d89cdac9e8725f2aefce25fcbfef41134c9ad412"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
