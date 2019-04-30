@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "feature/swdev-220-swagger"
-  digest = "1:60762b8a189cdf7f70509916efc7a7bef71d61294a3232cc5ea03ab310ec6cee"
+  digest = "1:cc31414e496f35d8a1b9313cd8f11d74c0f4ed7dba83348f121eb762e3222a1d"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "d7decf510a3e8211f033b20e28a4ce50196f9775"
+  revision = "289870298bcbc362386b037f8d6ab4e6cde8197a"
 
 [[projects]]
   branch = "master"
