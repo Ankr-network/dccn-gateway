@@ -2,8 +2,8 @@
 
 
 [[projects]]
-  branch = "develop"
-  digest = "1:9df0e6e3a347d8bf9627bb16a8276ddc6d56099f50bbe7b519ff0818c58c8791"
+  branch = "feature/SWDEV-243-FixAppApi"
+  digest = "1:140f90ce1f7a063d71fd63a550a636e4568fd4df395693b8ecb5d3a9a83ab879"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "0e0d2022fe9eb5a5addd37d465d442239bf463fe"
+  revision = "8327b96b5ecad87a499b7d0177ea643d0bf591b2"
 
 [[projects]]
   branch = "master"
@@ -77,7 +77,7 @@
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "2d0786266e9cd132da844109aa05016f11f3df28"
+  revision = "a5b02f93d862f065920dd6a40dddc66b60d0dec4"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
