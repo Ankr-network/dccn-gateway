@@ -28,7 +28,8 @@ var (
 )
 
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
-	mux := runtime.NewServeMux(opts...)
+	//mux := runtime.NewServeMux(opts...)
+	mux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{OrigName: true, EmitDefaults: true}))
 	dialOpts := []grpc.DialOption{grpc.WithInsecure()}
 	err := gwdcmgr.RegisterDCAPIHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
 	if err != nil {
