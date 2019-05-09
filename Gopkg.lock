@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "feature/SWDEV-243-FixAppApi"
-  digest = "1:140f90ce1f7a063d71fd63a550a636e4568fd4df395693b8ecb5d3a9a83ab879"
+  digest = "1:5feaac714123bac3b1aaf8e387e0a66778c28853564437998705e117b4782e11"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "8327b96b5ecad87a499b7d0177ea643d0bf591b2"
+  revision = "922112cb5382d82d0f2ec7c3a54375ac8b10f8ed"
 
 [[projects]]
   branch = "master"
