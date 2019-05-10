@@ -28,65 +28,93 @@ const log = {
 }
 
 let testAccessToken,
-      testRefreshToken
+  testRefreshToken
 
 const setAuthentication =
-    ({access_token, refresh_token}) => {
-      testAccessToken = access_token
-      testRefreshToken = refresh_token
-    }
+  ({
+    access_token,
+    refresh_token
+  }) => {
+    testAccessToken = access_token
+    testRefreshToken = refresh_token
+  }
 
 const getAuthentication = () =>
-    ({accessToken: testAccessToken, refreshToken: testRefreshToken})
+  ({
+    accessToken: testAccessToken,
+    refreshToken: testRefreshToken
+  })
 
 const isAuthenticated =
-    () => {
-      const {accessToken, refreshToken} = getAuthentication()
-      return !!(accessToken && refreshToken)
-    }
+  () => {
+    const {
+      accessToken,
+      refreshToken
+    } = getAuthentication()
+    return !!(accessToken && refreshToken)
+  }
 
 const authenticate =
-    ({email, password}) => {
-      return isAuthenticated() ?
-          Promise.resolve() :
-          req('POST', '/login', {email, password})
-              .then(
-                  ({authentication_result: {access_token, refresh_token}}) => {
-                      setAuthentication({access_token, refresh_token})})
-    }
+  ({
+    email,
+    password
+  }) => {
+    return isAuthenticated() ?
+      Promise.resolve() :
+      req('POST', '/login', {
+        email,
+        password
+      })
+      .then(
+        ({
+          authentication_result: {
+            access_token,
+            refresh_token
+          }
+        }) => {
+          setAuthentication({
+            access_token,
+            refresh_token
+          })
+        })
+  }
 
-const authenticateWithTestAcct = () => authenticate({email: testEmail, password:testPassword})
+const authenticateWithTestAcct = () => authenticate({
+  email: testEmail,
+  password: testPassword
+})
 
 const req =
-    (method, path, data = {}, headers = {}) => {
-      const opt = {method, uri: `${GATEWAY}${path}`, headers, json: true}
-
-      if (method === 'POST') {
-        opt.body = data
-      }
-      else {opt.qs = data}
-
-      log.info('req opt', opt)
-      return rp(opt)
+  (method, path, data = {}, headers = {}) => {
+    const opt = {
+      method,
+      uri: `${GATEWAY}${path}`,
+      headers,
+      json: true
     }
+
+    if (method === 'POST') {
+      opt.body = data
+    } else {
+      opt.qs = data
+    }
+
+    log.info('req opt', opt)
+    return rp(opt)
+  }
 
 const reqA =
-    (method, path, data = {}) => {
-      const {accessToken} = getAuthentication()
+  (method, path, data = {}) => {
+    const {
+      accessToken
+    } = getAuthentication()
 
-      return req(method, path, data, {Authorization: `Bearer ${accessToken}`})
-    }
+    return req(method, path, data, {
+      Authorization: `Bearer ${accessToken}`
+    })
+  }
 
-                                 module.exports = {
-      GATEWAY,
-      testEmail,
-      testPassword,
-      getAuthentication,
-      setAuthentication,
-      authenticate,
-      reqA,
-      log
-    }
+const toTS = (str) => (new Date(str)).getTime()
 
 global.chai = chai
 global.expect = expect
@@ -96,3 +124,15 @@ global.reqA = reqA
 global.log = log
 global.testEmail = testEmail
 global.testPassword = testPassword
+global.toTS = toTS
+
+module.exports = {
+  GATEWAY,
+  testEmail,
+  testPassword,
+  getAuthentication,
+  setAuthentication,
+  authenticate,
+  reqA,
+  log
+}
