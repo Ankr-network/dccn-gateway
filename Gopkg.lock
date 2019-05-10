@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "feature/SWDEV-247-fixapi"
-  digest = "1:2467ef4cddbcf33cc542f9b35be4d30f56f1b9c887acb9855a045e5ad63b2e64"
+  digest = "1:620309b9c033d24cf4dee0065f482fc21645dbaf96a822ae769df9e5800a539a"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "1150a2cafc43a171a672b768fcf25c7d7e3b3ded"
+  revision = "7e8f403170301821317146394543c0f0149ae8d6"
 
 [[projects]]
   branch = "master"
