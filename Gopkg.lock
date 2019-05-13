@@ -2,8 +2,8 @@
 
 
 [[projects]]
-  branch = "feature/SWDEV-249-Monitor"
-  digest = "1:c0b74030cdb2c9df6ad24c39c600e2e4ff0f60ce32f8382e454927b623c4f0f5"
+  branch = "feature/SWDEV-247-FIX"
+  digest = "1:2f1b7022062469b400cf7c189c46f85114d0812c431ae7bcbdb019fc4a789e0f"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "353c82dc8480d2361a0a1693155cd091e45a4256"
+  revision = "85ecefbaf1291a9f8279a6fc7d1b1366912ad08f"
 
 [[projects]]
   branch = "master"

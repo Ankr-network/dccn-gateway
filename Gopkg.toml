@@ -26,7 +26,7 @@
 
 
 [[constraint]]
-  branch = "feature/SWDEV-249-Monitor"
+  branch = "feature/SWDEV-247-FIX"
   name = "github.com/Ankr-network/dccn-common"
 
 [[constraint]]
