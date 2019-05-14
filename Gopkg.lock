@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:620309b9c033d24cf4dee0065f482fc21645dbaf96a822ae769df9e5800a539a"
+  digest = "1:2f1b7022062469b400cf7c189c46f85114d0812c431ae7bcbdb019fc4a789e0f"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "ac95836e426f27ced4687ea293c676aeff2710cf"
+  revision = "f80520f67b657591435d1643c811e95a09981c91"
 
 [[projects]]
   branch = "master"
@@ -106,7 +106,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1ee838281bf624e20f7c8a0ff6d691a44a15a2f17db62097a71ed6de4856e815"
+  digest = "1:fdd00ff3e2191c0deb61a7c44778f500d07b8a1b94cbb5d9bbc2b3d8afe53fc2"
   name = "google.golang.org/genproto"
   packages = [
     "googleapis/api/annotations",
@@ -115,7 +115,7 @@
     "protobuf/field_mask",
   ]
   pruneopts = "UT"
-  revision = "b515fa19cec88c32f305a962f34ae60068947aea"
+  revision = "d00d292a067ce1aa0017b40ca75437b42461fa61"
 
 [[projects]]
   digest = "1:707c3a5d10ed430ea767d73df122d9eb3dfb6312bbacc9f2e39204390686d1d0"
