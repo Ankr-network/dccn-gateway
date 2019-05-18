@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"path"
 	"strings"
-
 	"google.golang.org/grpc"
-
+	"encoding/json"
+	//"google.golang.org/grpc/status"
 	gwdcmgr "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1"
 	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
@@ -27,8 +27,31 @@ var (
 	swaggerDir = flag.String("swagger_dir", "template", "path to the directory which contains swagger definitions")
 )
 
+type errorBody struct {
+	Err string `json:"Error,omitempty"`
+	Code string `json:"Code,omitempty"`
+	Method string `json:"Method,omitempty"`
+}
+
+func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime.Marshaler, w http.ResponseWriter, _ *http.Request, err error) {
+    const fallback = `{"error": "failed to marshal error message"}`
+
+    w.Header().Set("Content-type", marshaler.ContentType())
+    w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
+    jErr := json.NewEncoder(w).Encode(errorBody{
+		Err: strings.Split(grpc.ErrorDesc(err), ":")[1],
+		Code: "testCode",
+		Method: strings.Split(grpc.ErrorDesc(err), ":")[0],
+    })
+
+    if jErr != nil {
+        w.Write([]byte(fallback))
+    }
+}
+
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
-	//mux := runtime.NewServeMux(opts...)
+	//mux := runtime.NewServeMux(
+	//	runtime.WithProtoErrorHandler(CustomHTTPError))
 	mux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{OrigName: true, EmitDefaults: true}))
 	dialOpts := []grpc.DialOption{grpc.WithInsecure()}
 	err := gwdcmgr.RegisterDCAPIHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
