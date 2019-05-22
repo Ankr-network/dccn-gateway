@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:a0dfe33b16609ef7b700083c22345e05fce9a5327a3c12b19f19c9edb7d5e22d"
+  digest = "1:788c6e75779e3df224d912de58a97f2dd07f58c37cd076397f1123e8c3b8c6ae"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "696593cbe327915ebe8be91704ca80344e7e0ad2"
+  revision = "6fdef688d5a72b6fdeb11c0373c5b6e4868e99eb"
 
 [[projects]]
   branch = "master"
@@ -69,15 +69,15 @@
     "trace",
   ]
   pruneopts = "UT"
-  revision = "3ec19112720433827bbce8be9342797f5a6aaaf9"
+  revision = "018c4d40a106a7ae83689758294fcd8d23850745"
 
 [[projects]]
   branch = "master"
-  digest = "1:3851a6d548ec5a808e396408f03a30b8d05ef4426db7ad8688f639b2d88b47bd"
+  digest = "1:6ed9319f79a63e30779042ef237f81770df4091866e43f84a643257384b0aefc"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "61b9204099cb1bebc803c9ffb9b2d3acd9d457d9"
+  revision = "8097e1b27ff5e40620836729a9584e91b094b062"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
