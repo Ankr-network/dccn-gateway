@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"log"
 	"net/http"
 	"path"
 	"strings"
@@ -38,19 +37,10 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
     const fallback = `{"error": "failed to marshal error message"}`
 
     w.Header().Set("Content-type", marshaler.ContentType())
-	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
-	log.Printf(err.Error())
-	log.Printf(grpc.ErrorDesc(err))
-	code := strings.Split(grpc.ErrorDesc(err), ":")[1]
-	errors :=  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
-/*	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
-		code = strings.Split(grpc.ErrorDesc(err), ":")[2][23:]
-		errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":")
-	}*/
-
+    w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
     jErr := json.NewEncoder(w).Encode(errorBody{
-		Err: errors,
-		Code: code,
+		Err: strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":"),
+		Code: strings.Split(grpc.ErrorDesc(err), ":")[2][23:],
 		Method: strings.Split(grpc.ErrorDesc(err), ":")[0],
     })
 
