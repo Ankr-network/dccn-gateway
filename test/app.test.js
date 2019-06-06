@@ -86,7 +86,7 @@ describe('DCCN Application Manager', () => {
             const cancelApp = await reqA('POST', `/app/cancel/${app.app_deployment.app_id}`)
             expect(cancelApp).to.be.an('object')
             const appDetail = await reqA('GET', `/app/detail/${app.app_deployment.app_id}`)
-            expect(appDetail.app_report.app_status).to.be.equal('APP_CANCELING' || 'APP_CANCELED')
+            expect(appDetail.app_report.app_status).to.be.oneOf(['APP_CANCELING', 'APP_CANCELED'])
         })
     })
 
