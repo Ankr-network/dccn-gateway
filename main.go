@@ -42,10 +42,10 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 	log.Printf(grpc.ErrorDesc(err))
 	code := strings.Split(grpc.ErrorDesc(err), ":")[1]
 	errors :=  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
-	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
+/*	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
 		code = strings.Split(grpc.ErrorDesc(err), ":")[2][23:]
 		errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":")
-	}
+	}*/
 
     jErr := json.NewEncoder(w).Encode(errorBody{
 		Err: errors,
