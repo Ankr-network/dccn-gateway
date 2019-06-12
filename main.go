@@ -39,6 +39,7 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 
     w.Header().Set("Content-type", marshaler.ContentType())
 	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
+	log.Printf(err.Error())
 	log.Printf(grpc.ErrorDesc(err))
 	code := strings.Split(grpc.ErrorDesc(err), ":")[1]
 	errors :=  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
