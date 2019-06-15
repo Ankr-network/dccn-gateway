@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  branch = "develop"
+  branch = "feature/SWDEV-318-refresh"
   digest = "1:4d41cd583c5c7453b4a3d63aa6ea3ea58e79a0c54f2e43d842a1763b1f2f5c3b"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
@@ -12,7 +12,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "4c15c624db43322bcb3f59f7c6cfb2dce040d1dd"
+  revision = "880af04ec9556704e9cb1effdc7406dec30f6a0d"
 
 [[projects]]
   branch = "master"
