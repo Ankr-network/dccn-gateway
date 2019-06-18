@@ -12,6 +12,7 @@ import (
 	gwdcmgr "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1"
 	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
+	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -90,6 +91,10 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 	}
 
 	err = gwtaskmgr.RegisterAppMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+	err = gwlogmgr.RegisterLogMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
 	if err != nil {
 		return nil, err
 	}

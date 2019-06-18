@@ -3,11 +3,12 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:4d41cd583c5c7453b4a3d63aa6ea3ea58e79a0c54f2e43d842a1763b1f2f5c3b"
+  digest = "1:92b53908ac80650c6823858809c717715fc8513379a537b8c06cb77b42089438"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
     "protos/gateway/dcmgr/v1",
+    "protos/gateway/logmgr/v1",
     "protos/gateway/taskmgr/v1",
     "protos/gateway/usermgr/v1",
   ]
@@ -163,6 +164,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1",
+    "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1",
     "github.com/golang/glog",
