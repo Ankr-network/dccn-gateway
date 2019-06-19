@@ -28,4 +28,73 @@ describe('DCCN Data Center Manager', () => {
             expect(networkInfo.traffic).to.at.least(1)
         })
     })
+
+
+/*
+        context('reset_cluster', () => {
+            it('should return the detail of new cluster', async () => {
+                const cluster = await reqA('POST', '/dc/register' , {
+                    cluster_name: 'test_name_register'}
+                  )
+                log.info('my cluster after reset', JSON.stringify(cluster, null, '  '))
+                expect(cluster.cluster_id).to.be.a('string')
+                expect(cluster.cluster_name).to.be.a('string')
+                expect(cluster.configmap).to.be.a('string')
+
+
+            })
+        })
+    */
+
+    context('my_cluster', () => {
+        it('should return the detail of my cluster', async () => {
+            const cluster = await reqA('GET', '/dc/mydc')
+            log.info('my cluster', JSON.stringify(cluster, null, '  '))
+            expect(cluster.dc_id).to.be.a('string')
+            expect(cluster.dc_name).to.be.a('string')
+            expect(cluster.dc_status).to.be.a('string')
+
+
+        })
+    })
+
+/*
+    context('reset_cluster', () => {
+        it('should return the detail of new cluster', async () => {
+            const cluster = await reqA('POST', '/dc/reset', {
+                cluster_name: 'reset_test_name'
+            })
+            log.info('my cluster after reset', JSON.stringify(cluster, null, '  '))
+            expect(cluster.cluster_id).to.be.a('string')
+            expect(cluster.cluster_name).to.be.a('string')
+            expect(cluster.configmap).to.be.a('string')
+
+
+        })
+    })
+    */
+
+
+
+    context('dashboard', () => {
+        it('should return the information of cluster dashboard', async () => {
+            const dashboard = await reqA('GET', '/dc/dashboard')
+            log.info('dashboard', JSON.stringify(dashboard, null, '  '))
+
+            expect(dashboard.total_income).to.be.a('number')
+            expect(dashboard.current_usage.cpu_total).to.be.a('number')
+            expect(dashboard.current_usage.memory_total).to.be.a('number')
+            expect(dashboard.current_usage.storage_total).to.be.a('number')
+
+            expect(dashboard.week[0].income).to.be.a('number')
+            expect(dashboard.week[0].date).to.be.a('string')
+            expect(dashboard.week[0].usage.cpu_total).to.be.a('number')
+            expect(dashboard.month[0].usage.memory_total).to.be.a('number')
+
+
+        })
+    })
+    
+
+
 })
