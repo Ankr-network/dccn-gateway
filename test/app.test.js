@@ -119,4 +119,18 @@ describe('DCCN Application Manager', () => {
             })
         })
     })*/
+
+    context('login', () => {
+        it('should list applications', async () => {
+            
+            const appList = await reqA('POST', '/login', {
+                email,
+                password
+              })
+
+            log.info('appList', JSON.stringify(loginResponse, null, '  '))
+            expect(appList.app_reports.length).to.be.at.least(0)
+        })
+    })   
+
 })
