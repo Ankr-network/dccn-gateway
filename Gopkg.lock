@@ -2,17 +2,18 @@
 
 
 [[projects]]
-  branch = "develop"
-  digest = "1:32c91873ee2c18295a39ef230226b44507a89818f692e8cd1d357712e4ef5805"
+  branch = "master"
+  digest = "1:b356998c9fe0eaadc31b24fd18e96212454be1ef10a83454849361fde9d29d98"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
     "protos/gateway/dcmgr/v1",
+    "protos/gateway/logmgr/v1",
     "protos/gateway/taskmgr/v1",
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "56f87384340c635ad8c8f544f8ccc572c57bac3b"
+  revision = "1f59fb10a895a2958286fc9685cd33ccdd459bf4"
 
 [[projects]]
   branch = "master"
@@ -44,7 +45,7 @@
   version = "v1.3.1"
 
 [[projects]]
-  digest = "1:4f30fff718a459f9be272e7aa87463cdf4ba27bb8bd7f586ac34c36d670aada4"
+  digest = "1:d5343c4f76b40152cd27dae5c8248714316ba255bcb05d9dd349809ec388f17a"
   name = "github.com/grpc-ecosystem/grpc-gateway"
   packages = [
     "internal",
@@ -52,8 +53,8 @@
     "utilities",
   ]
   pruneopts = "UT"
-  revision = "8fd5fd9d19ce68183a6b0934519dfe7fe6269612"
-  version = "v1.9.0"
+  revision = "d54b3615f714b03edde6d9206fa0476a9169c966"
+  version = "v1.9.3"
 
 [[projects]]
   branch = "master"
@@ -69,15 +70,15 @@
     "trace",
   ]
   pruneopts = "UT"
-  revision = "3f473d35a33aa6fdd203e306dc439b797820e3f1"
+  revision = "da137c7871d730100384dbcf36e6f8fa493aef5b"
 
 [[projects]]
   branch = "master"
-  digest = "1:010311506e3917b54487c35a4277e2709678a40c1587d82492c40b78b6a0a01d"
+  digest = "1:730ba27cd66db3b98ec8f51a6f20d45ec277d490cca36b1f54e31d3fcaf4840e"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "93c9922d18aeb82498a065f07aec7ad7fa60dfb7"
+  revision = "04f50cda93cbb67f2afa353c52f342100e80e625"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
@@ -115,10 +116,10 @@
     "protobuf/field_mask",
   ]
   pruneopts = "UT"
-  revision = "a7e196e89fd3a3c4d103ca540bd5dac3a736e375"
+  revision = "710ae3a149df3775bfc2e9efb7f4fb97b186b233"
 
 [[projects]]
-  digest = "1:e8800ddadd6bce3bc0c5ffd7bc55dbdddc6e750956c10cc10271cade542fccbe"
+  digest = "1:cf01ae0753310464677058b125fa31e74fd943781782ada503180ad784fc83d3"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -150,19 +151,21 @@
     "resolver",
     "resolver/dns",
     "resolver/passthrough",
+    "serviceconfig",
     "stats",
     "status",
     "tap",
   ]
   pruneopts = "UT"
-  revision = "501c41df7f472c740d0674ff27122f3f48c80ce7"
-  version = "v1.21.1"
+  revision = "1d89a3c832915b2314551c1d2a506874d62e53f7"
+  version = "v1.22.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1",
+    "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1",
     "github.com/golang/glog",

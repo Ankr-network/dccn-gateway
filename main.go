@@ -12,6 +12,7 @@ import (
 	gwdcmgr "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1"
 	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
+	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -41,8 +42,15 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
 	log.Printf(err.Error())
 	log.Printf(grpc.ErrorDesc(err))
-	code := strings.Split(grpc.ErrorDesc(err), ":")[1]
-	errors :=  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+	var code string
+	var errors string
+	if grpc.ErrorDesc(err) == "Not Implemented" {
+		code = "NotFoundError"
+		errors = "This Api is not Implemented"
+	} else {
+	code = strings.Split(grpc.ErrorDesc(err), ":")[1]
+	errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+	}
 /*	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
 		code = strings.Split(grpc.ErrorDesc(err), ":")[2][23:]
 		errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":")
@@ -90,6 +98,10 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 	}
 
 	err = gwtaskmgr.RegisterAppMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+	err = gwlogmgr.RegisterLogMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
 	if err != nil {
 		return nil, err
 	}
