@@ -42,8 +42,15 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
 	log.Printf(err.Error())
 	log.Printf(grpc.ErrorDesc(err))
-	code := strings.Split(grpc.ErrorDesc(err), ":")[1]
-	errors :=  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+	var code string
+	var errors string
+	if grpc.ErrorDesc(err) == "Not Implemented" {
+		code = "NotFoundError"
+		errors = "This Api is not Implemented"
+	} else {
+	code = strings.Split(grpc.ErrorDesc(err), ":")[1]
+	errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+	}
 /*	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
 		code = strings.Split(grpc.ErrorDesc(err), ":")[2][23:]
 		errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":")
