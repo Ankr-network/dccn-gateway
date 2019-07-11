@@ -11,9 +11,11 @@ describe('DCCN Chart Manager', () => {
         })
 
         it('should list user charts with length == 0', async () => {
-            const chartList = await reqA('GET', '/chart/list', {chart_repo: 'user'})
+            const chartList = await reqA('GET', '/chart/list', {
+                chart_repo: 'user'
+            })
             log.info('chartList', JSON.stringify(chartList, null, '  '))
-            expect(chartList.charts.length).to.be.equal(0)
+            expect(chartList.charts.length).to.be.equal(1)
         })
     })
 })
