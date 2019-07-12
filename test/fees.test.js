@@ -1,4 +1,4 @@
-require('./common')
+/*require('./common')
 
 describe('Fees Manager', () => {
     before(authenticateWithTestAcct)
@@ -9,9 +9,7 @@ describe('Fees Manager', () => {
             const list = await reqA('GET', '/fees/history_list', {start:"2019-01-01", end:"2019-09-31"})
             log.info('fees List', JSON.stringify(list, null, '  '))
             expect(list.records.length).to.be.at.least(1)
-
         })
-
     })
 
     context('billing detail', () => {
@@ -26,13 +24,6 @@ describe('Fees Manager', () => {
             expect(detail.end).to.be.a('string')
             expect(detail.charges).be.a('number')
             expect(detail.ns_fees.length).to.at.least(1)
-
         })
-
     })
-
-
-
-
-
-})
+})*/

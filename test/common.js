@@ -93,7 +93,7 @@ const req =
       json: true
     }
 
-    if (method === 'POST') {
+    if (method === 'POST' || method === 'PUT') {
       opt.body = data
     } else {
       opt.qs = data
