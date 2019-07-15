@@ -6,7 +6,6 @@ describe('DCCN Namespace Manager', () => {
     context('namespace_create', () => {
         // regular inputs
         it('should create a namespace', async () => {
-
             const namespace_info = require('commander')
             namespace_info
                 .option('--ns_create_name <string>', 'type in a create namespace name', 'ns_create_test')
@@ -66,12 +65,12 @@ describe('DCCN Namespace Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
             
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
-        }).timeout(10000)
+        }).timeout(20000)
 
         // zero inputs
         it('cannot create a namespace with zero inputs, should throw an error', async () => {
@@ -247,7 +246,7 @@ describe('DCCN Namespace Manager', () => {
                     break
                 }
             } 
-        }).timeout(20000)
+        }).timeout(30000)
     })
 
     /*context('delete_namespace', () => {

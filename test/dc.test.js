@@ -1,4 +1,4 @@
-/*require('./common')
+require('./common')
 
 describe('DCCN Data Center Manager', () => {
     before(authenticateWithTestAcct)
@@ -29,17 +29,17 @@ describe('DCCN Data Center Manager', () => {
         })
     })
 
-        context('reset_cluster', () => {
-            it('should return the detail of new cluster', async () => {
-                const cluster = await reqA('POST', '/dc/register' , {
-                    cluster_name: 'test_name_register'}
-                  )
-                log.info('my cluster after reset', JSON.stringify(cluster, null, '  '))
-                expect(cluster.cluster_id).to.be.a('string')
-                expect(cluster.cluster_name).to.be.a('string')
-                expect(cluster.configmap).to.be.a('string')
-            })
+    /*context('reset_cluster', () => {
+        it('should return the detail of new cluster', async () => {
+            const cluster = await reqA('POST', '/dc/register' , {
+                cluster_name: 'test_name_register'}
+                )
+            log.info('my cluster after reset', JSON.stringify(cluster, null, '  '))
+            expect(cluster.cluster_id).to.be.a('string')
+            expect(cluster.cluster_name).to.be.a('string')
+            expect(cluster.configmap).to.be.a('string')
         })
+    })
     
     context('my_cluster', () => {
         it('should return the detail of my cluster', async () => {
@@ -76,5 +76,5 @@ describe('DCCN Data Center Manager', () => {
             expect(dashboard.week[0].usage.cpu_total).to.be.a('number')
             expect(dashboard.month[0].usage.memory_total).to.be.a('number')
         })
-    })
-})*/
+    })*/
+})

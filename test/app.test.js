@@ -76,14 +76,14 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // check the update results
             path_detail = '/app/detail/' + app.app_id
             app_updated = await reqA('GET', path_detail)
             object_name = app_updated.app_report.app_deployment.app_name
             expect(object_name).to.equal(app_info.app_update_name)
-        }).timeout(20000)
+        }).timeout(30000)
 
         // empty app name
         it('cannot update the application, should throw an error', async () => {
@@ -231,12 +231,12 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // purge the app created
             const appList = await reqA('GET', '/app/list')
             await Promise.all(appList.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(8000)
+        }).timeout(20000)
 
         // No.2 test
         // regular inputs with create namespace first
@@ -278,7 +278,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             const chart = chartList.charts[0]
             const app = await reqA('POST', '/app/create', {
@@ -299,7 +299,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // purge the app created
             const appList = await reqA('GET', '/app/list')
@@ -312,13 +312,13 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(6000)
+            sleep(8000)
 
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
 
-        }).timeout(20000)
+        }).timeout(30000)
             
         // No.3 test
         // empty name input
@@ -567,7 +567,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // get app details
             const appList = await reqA('GET', '/app/list')
@@ -586,7 +586,7 @@ describe('DCCN Application Manager', () => {
             // delete the app created
             const appList_delete = await reqA('GET', '/app/list')
             await Promise.all(appList_delete.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(6000)
+        }).timeout(20000)
     })
 
     
@@ -621,7 +621,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // cancel the app and check
             path_cancel = '/app/cancel/' + app.app_id
@@ -634,7 +634,7 @@ describe('DCCN Application Manager', () => {
             // delete the app created
             const appList_delete = await reqA('GET', '/app/list')
             await Promise.all(appList_delete.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(6000)
+        }).timeout(20000)
     })
 
     context('purge_application', () => {
@@ -667,7 +667,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // purge the app created and check
             const appList = await reqA('GET', '/app/list')
@@ -679,7 +679,7 @@ describe('DCCN Application Manager', () => {
             })
             const appListAfter = await reqA('GET', '/app/list')
             expect(appListAfter.app_reports.length).to.be.equal(0)
-        }).timeout(6000)
+        }).timeout(20000)
     })
 
     context('delete_all_namespace_created_in_app_test', () => {
@@ -692,6 +692,6 @@ describe('DCCN Application Manager', () => {
                     await reqA('DELETE', path)
                 } 
             }
-        }).timeout(8000)
+        }).timeout(20000)
     })
 })
