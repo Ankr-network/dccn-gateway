@@ -48,7 +48,7 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 		code = "NotFoundError"
 		errors = "This Api is not Implemented"
 	} else {
-	if len(strings.Split(grpc.ErrorDesc(err), ":")) > 3 {
+	if len(strings.Split(grpc.ErrorDesc(err), ":")) >= 3 {
 		code = strings.Split(grpc.ErrorDesc(err), ":")[1]
 		errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
 		} else {
