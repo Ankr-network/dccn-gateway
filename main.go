@@ -48,14 +48,14 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 		code = "NotFoundError"
 		errors = "This Api is not Implemented"
 	} else {
-	code = strings.Split(grpc.ErrorDesc(err), ":")[1]
-	errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+	if len(strings.Split(grpc.ErrorDesc(err), ":")) > 3 {
+		code = strings.Split(grpc.ErrorDesc(err), ":")[1]
+		errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+		} else {
+		code = "Invalid Format"
+		errors = "Invalid Format Error" 
+		}
 	}
-/*	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
-		code = strings.Split(grpc.ErrorDesc(err), ":")[2][23:]
-		errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":")
-	}*/
-
     jErr := json.NewEncoder(w).Encode(errorBody{
 		Err: errors,
 		Code: code,
