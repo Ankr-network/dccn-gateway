@@ -96,7 +96,7 @@ describe('DCCN Chart Manager', () => {
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.upload_name + '/' + chart_info.upload_ver
             await reqA('DELETE', delete_path)
         })
-    })
+    }).timeout(5000)
 
     context('chart_delete', () => {
         it('should delete chart by chart info', async () => {
