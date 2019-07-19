@@ -5,7 +5,7 @@ chai.use(chaiAsPromised)
 
 const expect = chai.expect
 const GATEWAY = 'https://gateway-stage.dccn.ankr.com'
-const testEmail = 'ankrtestuser1@mailinator.com'
+const testEmail = 'liyifan9308@gmail.com'
 const testPassword = 'ankr1234'
 const logOn = false
 const log = {
