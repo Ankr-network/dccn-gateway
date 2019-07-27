@@ -3,13 +3,14 @@
 
 [[projects]]
   branch = "feature/SWDEV-332-DeleteUserid"
-  digest = "1:b356998c9fe0eaadc31b24fd18e96212454be1ef10a83454849361fde9d29d98"
+  digest = "1:85ef8319e6f52a9cb8c4681fcb6f0c4b856dc258d47af283628751a5cb0db073"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
     "protos/gateway/dcmgr/v1",
     "protos/gateway/logmgr/v1",
     "protos/gateway/taskmgr/v1",
+    "protos/gateway/teammgr/v1",
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
@@ -167,6 +168,7 @@
     "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1",
+    "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1",
     "github.com/golang/glog",
     "github.com/grpc-ecosystem/grpc-gateway/runtime",
