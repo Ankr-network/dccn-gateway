@@ -1,11 +1,9 @@
 require('./common')
 
 describe('DCCN User Manager', () => {
-    before(authenticateWithTestAcct)
-
-
-    for (var i = 0; i < 1000; i++){
-        try{
+    //before(authenticateWithTestAcct)
+    try{
+        for (var i = 0; i < 1000; i++){
             context('login',() => {
                 it('should send a login request', async () => {
                     const loginfo = await reqA('POST', '/login',{
@@ -19,12 +17,8 @@ describe('DCCN User Manager', () => {
             })
 
         }
-        catch(e){
-            if(e == null){
-                throw e
-            }
-        }
-        
-    
+    }catch(e){
+        throw e
     }
+    throw new Error('error for logging in too many times')  
 })
