@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "feature/SWDEV-332-DeleteUserid"
-  digest = "1:85ef8319e6f52a9cb8c4681fcb6f0c4b856dc258d47af283628751a5cb0db073"
+  digest = "1:2cec60b9de14f855e3a97324be2ccfa2d5a1940239253bb212b7fb8077fe6bfb"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -14,7 +14,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "311c17a015d50d42b6120b84c69dd52b168c1c05"
+  revision = "b4e09c99242c8a7db54bd10069050f9f96977ac1"
 
 [[projects]]
   branch = "master"
