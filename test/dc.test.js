@@ -1,8 +1,6 @@
-require('./common')
-
+/*require('./common')
 describe('DCCN Data Center Manager', () => {
     before(authenticateWithTestAcct)
-
     context('list_data_center', () => {
         it('should list data centers with length > 0', async () => {
             const dcList = await reqA('GET', '/dc/list')
@@ -10,7 +8,6 @@ describe('DCCN Data Center Manager', () => {
             expect(dcList.dcList.length).to.be.at.least(1)
         })
     })
-
     context('get_network_info', () => {
         it('should return the overall network info', async () => {
             const networkInfo = await reqA('GET', '/dc/networkinfo')
@@ -27,7 +24,6 @@ describe('DCCN Data Center Manager', () => {
             expect(networkInfo.traffic).to.at.least(1)
         })
     })
-
     context('my_data_center', () => {
         it('should return the detail of my data center', async () => {
             const cluster = await reqA('GET', '/dc/mydc')
@@ -37,7 +33,6 @@ describe('DCCN Data Center Manager', () => {
             expect(cluster.dc_status).to.be.a('string')
         })
     })
-
     context('dashboard', () => {
         it('should return the information of cluster dashboard', async () => {
             const dashboard = await reqA('GET', '/dc/dashboard')
@@ -50,7 +45,6 @@ describe('DCCN Data Center Manager', () => {
             expect(dashboard.year.length).to.be.at.least(0)
         })
     })
-
     context('user_history_fees_list', () => {
         it('should list the user history fees', async () => {
             const history_fees = await reqA('GET', '/fees/history_list')
@@ -58,7 +52,6 @@ describe('DCCN Data Center Manager', () => {
             expect(history_fees.records.length).to.be.at.least(0)
         })
     })
-
     context('month_fees_detail', () => {
         it('should return the detail of month fees', async () => {
             const month_fees = await reqA('GET', '/fees/month_detail')
@@ -76,7 +69,6 @@ describe('DCCN Data Center Manager', () => {
             expect(month_fees.ns_fees.length).to.be.at.least(0)
         })
     })
-
     context('invoice_detail', () => {
         it('should return the detail of invoice', async () => {
             const invoice = await reqA('GET', '/fees/invoice_detail')
@@ -94,22 +86,18 @@ describe('DCCN Data Center Manager', () => {
             expect(invoice.ns_fees.length).to.be.at.least(0)
         })
     })
-
     context('reset_data_center', () => {
         it('should reset the cluster name, client key, etc. of a cluster', async () => {
             const reset_cluster = require('commander')
             reset_cluster
                 .option('--reset_cluster_name <string>', 'type in an reset cluster name', 'reset_cluster_test')
             reset_cluster.parse(process.argv)
-
             // check the input
             try{
                 expect(reset_cluster.reset_cluster_name.length).to.be.at.least(0)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid cluster name (a string: at least length 0)')
-                }
+                throw new Error("Please type in a valid cluster name (a string: at least length 0)")
             }
             
             const cluster = await reqA('POST', '/dc/reset' , {
@@ -128,7 +116,6 @@ describe('DCCN Data Center Manager', () => {
             }
         })
     })
-
     /* a registration needs the authorization and an account can just register once 
     context('register_data_center', () => {
         it('should register a new cluster', async () => {
@@ -136,15 +123,12 @@ describe('DCCN Data Center Manager', () => {
             register_cluster
                 .option('--register_cluster_name <string>', 'type in an register cluster name', 'register_cluster_test')
             register_cluster.parse(process.argv)
-
             // check the input
             try{
                 expect(register_cluster.register_cluster_name.length).to.be.at.least(0)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid cluster name (a string: at least length 0)')
-                }
+                throw new Error("Please type in a valid cluster name (a string: at least length 0)")
             }
             const cluster = await reqA('POST', '/dc/register' , {
                 cluster_name: register_cluster.register_cluster_name}
@@ -160,5 +144,5 @@ describe('DCCN Data Center Manager', () => {
                 expect(cluster.cluster_name).to.be.equal(register_cluster.register_cluster_name)
             }
         })
-    })*/
-})
+    })
+})*/

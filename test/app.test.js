@@ -51,10 +51,8 @@ describe('DCCN Application Manager', () => {
                 expect(app_info.app_update_name.length).to.be.at.least(1)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_update_name (a string: at least length 1)')
+                throw new Error("Please type in a valid app_update_name (a string: at least length 1)")
                 }
-            }
 
             app_path = '/app/detail/' + app.app_id
             const appDetail = await reqA('GET', app_path)
@@ -76,41 +74,14 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             // check the update results
             path_detail = '/app/detail/' + app.app_id
             app_updated = await reqA('GET', path_detail)
             object_name = app_updated.app_report.app_deployment.app_name
             expect(object_name).to.equal(app_info.app_update_name)
-        }).timeout(30000)
-
-        // empty app name
-        it('cannot update the application, should throw an error', async () => {
-            const appList = await reqA('GET', '/app/list')
-            expect(appList.app_reports.length).to.be.at.least(1)
-            const app = appList.app_reports[0]
-            const chartList = await reqA('GET', '/chart/list', {
-                chart_repo: 'stable'
-            })
-            const chart = chartList.charts[0]
-            const object_id = app.app_deployment.app_id
-            path = '/app/update/' + object_id
-            try{
-                await reqA('POST', path, {
-                app_name: '',
-                chart_name: chart.chart_name,
-                chart_repo: chart.chart_repo,
-                chart_ver: chart.chart_latest_version
-              })
-            }
-            catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
-            }
-        })
+        }).timeout(20000)
 
         // no exist chart
         it('cannot update the application, should throw an error', async () => {
@@ -119,6 +90,8 @@ describe('DCCN Application Manager', () => {
             const app = appList.app_reports[0]
             const object_id = app.app_deployment.app_id
             path = '/app/update/' + object_id
+            
+            var flag = 0
             try{
                 await reqA('POST', path, {
                 app_name: '',
@@ -126,13 +99,13 @@ describe('DCCN Application Manager', () => {
                 chart_repo: None,
                 chart_ver: None
               })
+            }catch(e) {
+                flag = 1           
             }
-            catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+            if (flag == 0) {
+                throw new Error("should not update app for no exist chart")
             }
+
         })
         
         // delete the app created
@@ -161,47 +134,36 @@ describe('DCCN Application Manager', () => {
                 expect(app_info.app_create_name.length).to.be.at.least(1)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_create_name (a string: at least length 1)')
-                }
+                throw new Error("Please type in a valid app_create_name (a string: at least length 1)")
             }
 
             try{
                 expect(app_info.app_create_ns_name.length).to.be.at.least(1)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_create_ns_name (a string: at least length 1)')
-                }
+                throw new Error("Please type in a valid app_create_ns_name (a string: at least length 1)")
             }
 
             try{
                 expect(app_info.app_create_ns_cpu_limit).to.be.at.least(100)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_create_ns_cpu_limit (an integer: at least 100)')
-                }
+                throw new Error("Please type in a valid app_create_ns_cpu_limit (an integer: at least 100)")
             }
 
             try{
                 expect(app_info.app_create_ns_mem_limit).to.be.at.least(256)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_create_ns_mem_limit (an integer: at least 256)')
-                }
+                throw new Error("Please type in a valid app_create_ns_mem_limit (an integer: at least 256)")
             }
 
             try{
                 expect(app_info.app_create_ns_storage_limit).to.be.at.least(2)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_create_ns_storage_limit (an integer: at least 2)')
-                }
+                throw new Error("Please type in a valid app_create_ns_storage_limit (an integer: at least 2)")
             }
-
 
             const chartList = await reqA('GET', '/chart/list', {
                 chart_repo: 'stable'
@@ -231,12 +193,12 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             // purge the app created
             const appList = await reqA('GET', '/app/list')
             await Promise.all(appList.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(20000)
+        }).timeout(8000)
 
         // No.2 test
         // regular inputs with create namespace first
@@ -250,9 +212,7 @@ describe('DCCN Application Manager', () => {
                 expect(app_info.app_create_name.length).to.be.at.least(1)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid app_create_name (a string: at least length 1)')
-                }
+                throw new Error("Please type in a valid app_create_name (a string: at least length 1)")
             }
 
             const chartList = await reqA('GET', '/chart/list', {
@@ -278,7 +238,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             const chart = chartList.charts[0]
             const app = await reqA('POST', '/app/create', {
@@ -299,7 +259,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             // purge the app created
             const appList = await reqA('GET', '/app/list')
@@ -312,13 +272,13 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(6000)
 
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
 
-        }).timeout(30000)
+        }).timeout(20000)
             
         // No.3 test
         // empty name input
@@ -328,6 +288,8 @@ describe('DCCN Application Manager', () => {
             })
             expect(chartList.charts.length).to.be.at.least(1)
             const chart = chartList.charts[0]
+
+            var flag = 0
             try{
                 await reqA('POST', '/app/create', {
                     app_name: '',
@@ -345,10 +307,10 @@ describe('DCCN Application Manager', () => {
                     })
                 }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1           
+            }
+            if (flag == 0) {
+                throw new Error("should not create app for an empty app name")
             }
         })
 
@@ -360,6 +322,8 @@ describe('DCCN Application Manager', () => {
             })
             expect(chartList.charts.length).to.be.at.least(1)
             const chart = chartList.charts[0]
+            
+            var flag = 0
             try{
                 await reqA('POST', '/app/create', {
                     app_name: 'app1test',
@@ -377,10 +341,10 @@ describe('DCCN Application Manager', () => {
                     })
                 }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1           
+            }
+            if (flag == 0) {
+                throw new Error("should not create app for zero value input")       
             }
         })
 
@@ -392,6 +356,8 @@ describe('DCCN Application Manager', () => {
             })
             expect(chartList.charts.length).to.be.at.least(1)
             const chart = chartList.charts[0]
+            
+            var flag = 1
             try{
                 await reqA('POST', '/app/create', {
                     app_name: 'app1test',
@@ -409,10 +375,10 @@ describe('DCCN Application Manager', () => {
                     })
                 }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1           
+            }
+            if (flag == 0) {
+                throw new Error("should not create app for wrong type input")
             }
         })
 
@@ -424,6 +390,8 @@ describe('DCCN Application Manager', () => {
             })
             expect(chartList.charts.length).to.be.at.least(1)
             const chart = chartList.charts[0]
+            
+            var flag = 1
             try{
                 await reqA('POST', '/app/create', {
                     app_name: 'app1test',
@@ -441,10 +409,10 @@ describe('DCCN Application Manager', () => {
                     })
                 }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1           
+            }
+            if (flag == 0) {
+                throw new Error("should not create app for negative value inputs")         
             }
         })
 
@@ -456,6 +424,8 @@ describe('DCCN Application Manager', () => {
             })
             expect(chartList.charts.length).to.be.at.least(1)
             const chart = chartList.charts[0]
+            
+            var flag = 0
             try{
                 await reqA('POST', '/app/create', {
                     app_name: 'app1test',
@@ -473,10 +443,10 @@ describe('DCCN Application Manager', () => {
                     })
                 }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1           
+            }
+            if (flag == 0) {
+                throw new Error("should not create app for no namespace inputs")
             }
         })
 
@@ -487,6 +457,8 @@ describe('DCCN Application Manager', () => {
                 chart_repo: 'stable'
             })
             expect(chartList.charts.length).to.be.at.least(1)
+            
+            var flag = 0
             try{
                 await reqA('POST', '/app/create', {
                     app_name: 'app1test',
@@ -504,10 +476,11 @@ describe('DCCN Application Manager', () => {
                     })
                 }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1           
+            }
+            if (flag == 0) {
+                throw new Error("should not create app for no exist chart")
+         
             }
         })
     })
@@ -567,7 +540,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             // get app details
             const appList = await reqA('GET', '/app/list')
@@ -586,7 +559,7 @@ describe('DCCN Application Manager', () => {
             // delete the app created
             const appList_delete = await reqA('GET', '/app/list')
             await Promise.all(appList_delete.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(20000)
+        }).timeout(8000)
     })
 
     
@@ -621,7 +594,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             // cancel the app and check
             path_cancel = '/app/cancel/' + app.app_id
@@ -634,7 +607,7 @@ describe('DCCN Application Manager', () => {
             // delete the app created
             const appList_delete = await reqA('GET', '/app/list')
             await Promise.all(appList_delete.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(20000)
+        }).timeout(6000)
     })
 
     context('purge_application', () => {
@@ -667,7 +640,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(4000)
 
             // purge the app created and check
             const appList = await reqA('GET', '/app/list')
@@ -679,7 +652,7 @@ describe('DCCN Application Manager', () => {
             })
             const appListAfter = await reqA('GET', '/app/list')
             expect(appListAfter.app_reports.length).to.be.equal(0)
-        }).timeout(20000)
+        }).timeout(6000)
     })
 
     context('delete_all_namespace_created_in_app_test', () => {
@@ -692,6 +665,6 @@ describe('DCCN Application Manager', () => {
                     await reqA('DELETE', path)
                 } 
             }
-        }).timeout(20000)
+        }).timeout(8000)
     })
 })
