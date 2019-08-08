@@ -65,18 +65,14 @@ describe('DCCN Chart Manager', () => {
                 expect(chart_info.upload_name.length).to.be.at.least(1)        
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid chart_name (a string: at least length 1)')
-                }
+                throw new Error("Please type in a valid chart_name (a string: at least length 1)")
             }
 
             try{
                 expect(chart_info.upload_ver.length).to.be.at.least(1)        
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid chart_ver (a string: at least length 1)')
-                }
+                throw new Error("Please type in a valid chart_ver (a string: at least length 1)")
             }
 
             const upload_path = '/chart/upload/' + 'user' + '/' + chart_info.upload_name + '/' + chart_info.upload_ver
@@ -96,7 +92,7 @@ describe('DCCN Chart Manager', () => {
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.upload_name + '/' + chart_info.upload_ver
             await reqA('DELETE', delete_path)
         })
-    }).timeout(5000)
+    })
 
     context('chart_delete', () => {
         it('should delete chart by chart info', async () => {

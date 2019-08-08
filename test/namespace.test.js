@@ -18,36 +18,28 @@ describe('DCCN Namespace Manager', () => {
                 expect(namespace_info.ns_create_name.length).to.be.at.least(1)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_name (a string: at least length 1)')
-                }
+                throw new Error("Please type in a valid namespace_name (a string: at least length 1)")
             }
 
             try{
                 expect(namespace_info.ns_create_cpu_limit).to.be.at.least(100)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_cpu_limit (an integer: at least 100)')
-                }
+                throw new Error("Please type in a valid namespace_cpu_limit (an integer: at least 100)")
             }
 
             try{
                 expect(namespace_info.ns_create_mem_limit).to.be.at.least(256)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_mem_limit (an integer: at least 256)')
-                }
+                throw new Error("Please type in a valid namespace_mem_limit (an integer: at least 256)")
             }
 
             try{
                 expect(namespace_info.ns_create_storage_limit).to.be.at.least(2)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_storage_limit (an integer: at least 2)')
-                }
+                throw new Error("Please type in a valid namespace_storage_limit (an integer: at least 2)")
             }
 
             const namespace = await reqA('POST', '/namespace/create', {
@@ -74,6 +66,7 @@ describe('DCCN Namespace Manager', () => {
 
         // zero inputs
         it('cannot create a namespace with zero inputs, should throw an error', async () => {
+            var flag = 0
             try{
                 await reqA('POST', '/namespace/create', {
                 ns_name: 'ns_create_test_zero_input',
@@ -83,10 +76,10 @@ describe('DCCN Namespace Manager', () => {
                 })
             }
             catch(e) {
-                if (e == null)
-                {                   
-                    throw e
-                }               
+                flag = 1              
+            }
+            if (flag == 0) {
+                throw new Error("should not create a namespace with zero inputs")
             }
         })
     })
@@ -138,27 +131,21 @@ describe('DCCN Namespace Manager', () => {
                 expect(namespace_info.ns_update_cpu_limit).to.be.at.least(100)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_cpu_limit (an integer: at least 100)')
-                }
+                throw new Error("Please type in a valid namespace_cpu_limit (an integer: at least 100)")
             }
 
             try{
                 expect(namespace_info.ns_update_mem_limit).to.be.at.least(256)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_mem_limit (an integer: at least 256)')
-                }
+                throw new Error("Please type in a valid namespace_mem_limit (an integer: at least 256)")
             }
 
             try{
                 expect(namespace_info.ns_update_storage_limit).to.be.at.least(2)
             }
             catch(e){
-                if (e != null){
-                    console.log('Please type in a valid namespace_storage_limit (an integer: at least 2)')
-                }
+                throw new Error("Please type in a valid namespace_storage_limit (an integer: at least 2)")
             }
 
             await reqA('POST', '/namespace/update', {
