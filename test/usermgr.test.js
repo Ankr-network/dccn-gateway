@@ -147,7 +147,7 @@ describe('DCCN User Manager', () => {
             })
             console.log(createadd)
             log.info('createadd', JSON.stringify(createadd, null, ' '))
-            expect(createadd.typeaddress).to.equal('0x72D8B4D09c8Ee1b0EBA5B11Af56a010da1ED8564')
+            expect(createadd.typeaddress).to.equal('0x9162c38f6fEb4e7842ba5fe70C78e710077F294Cs')
         })
     })
 })
