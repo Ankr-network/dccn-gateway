@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:87f5fb41b6ef835816fcecf6e7b059f46e846e50a7ea19b5e68775a68c985803"
+  digest = "1:603a642bab26862eb1b1782e2bbb558fbd8dd1f3f3f5a208418d4eed6a033062"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -13,7 +13,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "cc11b5e7f5414858e2755311be701501376f67b2"
+  revision = "a0a0fb2b13f44f29fd3cbbd6aa1e281a6f5592e5"
 
 [[projects]]
   branch = "master"
