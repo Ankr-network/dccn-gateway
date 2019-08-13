@@ -34,8 +34,8 @@ describe('DCCN User Manager', () => {
     context('refresh',() => {
         it('should send a refresh request', async () => {
             const loginfo = await reqA('POST', '/login',{
-                email: 'liyifan9308@gmail.com',
-                password: 'ankr1234',
+                email: 'test12345@mailinator.com',
+                password: 'test12345',
             })
             //refreshtoken0: loginfo.authentication_result.refresh_token
             const refreshtoken = await reqA('POST', '/refresh',{
@@ -52,21 +52,18 @@ describe('DCCN User Manager', () => {
 
     context('change_password',() => {
         it('should send a change password request', async () => {
-            const loginfo = await reqA('POST', '/login',{
-                email: 'liyifan9308@gmail.com',
-                password: 'ankr1234'
-            })
             const changepass = await reqA('POST', '/change_password',{
-                old_password: 'ankr1234' ,
-                new_password: 'ankr12345678'
+                old_password: 'test12345' ,
+                new_password: 'test12345678'
             })
             const loginfo2 = await reqA('POST', '/login',{
-                email: 'liyifan9308@gmail.com',
-                password: 'ankr12345678'
+                email: 'test12345@mailinator.com',
+                password: 'test12345678'
             })
+
             const changepass2 = await reqA('POST', '/change_password',{
-                old_password: 'ankr12345678' ,
-                new_password: 'ankr1234'
+                old_password: 'test12345678' ,
+                new_password: 'test12345'
             })
             log.info('changepass', JSON.stringify(changepass, null, ' '))
         })
@@ -147,7 +144,7 @@ describe('DCCN User Manager', () => {
             })
             console.log(createadd)
             log.info('createadd', JSON.stringify(createadd, null, ' '))
-            expect(createadd.typeaddress).to.equal('0x72D8B4D09c8Ee1b0EBA5B11Af56a010da1ED8564')
+            expect(createadd.typeaddress).to.equal('0x9162c38f6fEb4e7842ba5fe70C78e710077F294C')
         })
     })
 })

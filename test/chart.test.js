@@ -31,7 +31,7 @@ describe('DCCN Chart Manager', () => {
         // Zilliqa
         it('should list charts details by ', async () => {
             path = '/chart/detail/stable/zilliqa/0.1.0'
-            const chart_detail = await reqA('GET', path)         
+            const chart_detail = await reqA('GET', path)       
             expect(chart_detail.custom_values.length).to.be.at.least(1)
         })
     })
