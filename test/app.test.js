@@ -38,7 +38,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(10000)
 
             // app update
             const app_info = require('commander')
@@ -74,14 +74,14 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(10000)
 
             // check the update results
             path_detail = '/app/detail/' + app.app_id
             app_updated = await reqA('GET', path_detail)
             object_name = app_updated.app_report.app_deployment.app_name
             expect(object_name).to.equal(app_info.app_update_name)
-        }).timeout(20000)
+        }).timeout(30000)
 
         // no exist chart
         it('cannot update the application, should throw an error', async () => {
@@ -193,12 +193,120 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // purge the app created
             const appList = await reqA('GET', '/app/list')
             await Promise.all(appList.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
-        }).timeout(8000)
+        }).timeout(15000)
+
+
+        // No.1 test plus for Zilliqa
+        // regular direct inputs
+        it('should create an application', async () => {
+            const app_info = require('commander')
+            app_info
+                .option('--app_create_name <string>', 'type in a create app name', 'app_create_test')
+                .option('--app_create_ns_name <string>', 'type in a create namespace name', 'app_create_ns_test')
+                .option('--app_create_ns_cpu_limit <int>', 'type in a create namespace cpu limit', 1000)
+                .option('--app_create_ns_mem_limit <int>', 'type in a create namespace mem limit', 2048)
+                .option('--app_create_ns_storage_limit <int>', 'type in a create namespace storage limit', 8)
+                .option('--app_create_customValue_key <string>', 'type in a customValue_key', 'app_create_customValue_key')
+                .option('--app_create_customValue_value <string>', 'type in a customValue_key', 'app_create_customValue_value')
+            app_info.parse(process.argv)
+            
+            // check the input
+            try{
+                expect(app_info.app_create_name.length).to.be.at.least(1)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_name (a string: at least length 1)")
+            }
+
+            try{
+                expect(app_info.app_create_ns_name.length).to.be.at.least(1)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_ns_name (a string: at least length 1)")
+            }
+
+            try{
+                expect(app_info.app_create_ns_cpu_limit).to.be.at.least(100)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_ns_cpu_limit (an integer: at least 100)")
+            }
+
+            try{
+                expect(app_info.app_create_ns_mem_limit).to.be.at.least(256)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_ns_mem_limit (an integer: at least 256)")
+            }
+
+            try{
+                expect(app_info.app_create_ns_storage_limit).to.be.at.least(2)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_ns_storage_limit (an integer: at least 2)")
+            }
+
+            try{
+                expect(app_info.app_create_customValue_key.length).to.be.at.least(1)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_customValue_key (a string: at least length 1)")
+            }
+
+            try{
+                expect(app_info.app_create_customValue_value.length).to.be.at.least(1)
+            }
+            catch(e){
+                throw new Error("Please type in a valid app_create_customValue_string (a string: at least length 1)")
+            }
+
+            const app = await reqA('POST', '/app/create', {
+                app_name: app_info.app_create_name,
+                chart: {
+                    chart_name: 'zilliqa',
+                    chart_repo: 'stable',
+                    chart_ver: '0.1.0'
+                },
+                namespace: {
+                    ns_name: app_info.app_create_ns_name,
+                    ns_cpu_limit: app_info.app_create_ns_cpu_limit,
+                    ns_mem_limit: app_info.app_create_ns_mem_limit,
+                    ns_storage_limit: app_info.app_create_ns_storage_limit
+                },
+                custom_values: [
+                    {
+                    Key: "ankrCustomValues.seed_port",
+                    Value: "32137"},
+                    {
+                    Key: "ankrCustomValues.pubkey",
+                    Value: "03AB2115FA0FF77359B38FD14883B16412C7BF652EAD2C218C4B4F56F1ADFB3B89",
+                    },
+                    {
+                    Key: "ankrCustomValues.prikey",
+                    Value: "8F0FA8FD1849DA7A2B6B02404B60D3BC3D723603C4CAEDEE086B57F28B90798C",
+                    }]
+            })
+            expect(app.app_id).to.be.a('string')
+
+            // wait for app status changed
+            function sleep(delay) {
+                var start = (new Date()).getTime()
+                while((new Date()).getTime() - start < delay) {
+                    continue
+                }
+            }
+            sleep(8000)
+
+            // purge the app created
+            const appList = await reqA('GET', '/app/list')
+            await Promise.all(appList.app_reports.map(app => reqA('DELETE', `/app/purge/${app.app_deployment.app_id}`)))
+        }).timeout(15000)
+
 
         // No.2 test
         // regular inputs with create namespace first
@@ -238,7 +346,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             const chart = chartList.charts[0]
             const app = await reqA('POST', '/app/create', {
@@ -259,7 +367,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(4000)
+            sleep(8000)
 
             // purge the app created
             const appList = await reqA('GET', '/app/list')
@@ -272,13 +380,15 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(6000)
+            sleep(8000)
 
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
 
-        }).timeout(20000)
+        }).timeout(30000)
+
+
             
         // No.3 test
         // empty name input
