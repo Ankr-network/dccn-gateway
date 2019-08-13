@@ -57,17 +57,17 @@ describe('DCCN User Manager', () => {
                 password: 'ankr1234'
             })
             const changepass = await reqA('POST', '/change_password',{
-                old_password: 'ankr1234' ,
-                new_password: 'ankr12345678'
+                old_password: 'test12345' ,
+                new_password: 'test12345678'
             })
-/*            const loginfo2 = await reqA('POST', '/login',{
-                email: 'liyifan9308@gmail.com',
-                password: 'ankr12345678'
-            })
+            //const loginfo2 = await reqA('POST', '/login',{
+            //    email: 'liyifan9308@gmail.com',
+            //    password: 'ankr12345678'
+            //})
             const changepass2 = await reqA('POST', '/change_password',{
-                old_password: 'ankr12345678' ,
-                new_password: 'ankr1234'
-            })*/
+                old_password: 'test12345678' ,
+                new_password: 'test12345'
+            })
             log.info('changepass', JSON.stringify(changepass, null, ' '))
         })
     })
