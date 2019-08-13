@@ -27,6 +27,13 @@ describe('DCCN Chart Manager', () => {
             const chart_detail = await reqA('GET', path)
             expect(chart_detail.chart_version_details.length).to.be.at.least(1)
         })
+
+        // Zilliqa
+        it('should list charts details by ', async () => {
+            path = '/chart/detail/stable/zilliqa/0.1.0'
+            const chart_detail = await reqA('GET', path)         
+            expect(chart_detail.custom_values.length).to.be.at.least(1)
+        })
     })
 
     context('chart_download', () => {
@@ -41,7 +48,7 @@ describe('DCCN Chart Manager', () => {
             const file = await reqA('GET', path)
             expect(file.chart_file.length).to.be.at.least(1)
         })
-    })
+    }).timeout(4000)
 
     context('chart_upload', () => {
         it('should upload a chart file', async () => {
