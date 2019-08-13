@@ -60,14 +60,14 @@ describe('DCCN User Manager', () => {
                 old_password: 'ankr1234' ,
                 new_password: 'ankr12345678'
             })
-            const loginfo2 = await reqA('POST', '/login',{
+/*            const loginfo2 = await reqA('POST', '/login',{
                 email: 'liyifan9308@gmail.com',
                 password: 'ankr12345678'
             })
             const changepass2 = await reqA('POST', '/change_password',{
                 old_password: 'ankr12345678' ,
                 new_password: 'ankr1234'
-            })
+            })*/
             log.info('changepass', JSON.stringify(changepass, null, ' '))
         })
     })
@@ -147,7 +147,7 @@ describe('DCCN User Manager', () => {
             })
             console.log(createadd)
             log.info('createadd', JSON.stringify(createadd, null, ' '))
-            expect(createadd.typeaddress).to.equal('0x72D8B4D09c8Ee1b0EBA5B11Af56a010da1ED8564')
+            expect(createadd.typeaddress).to.equal('0x9162c38f6fEb4e7842ba5fe70C78e710077F294C')
         })
     })
 })
