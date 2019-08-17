@@ -7,6 +7,9 @@ const expect = chai.expect
 const GATEWAY = 'https://gateway-stage.dccn.ankr.com'
 const testEmail = 'ankrtestuser1@mailinator.com'
 const testPassword = 'ankr1234'
+
+const testPassword1 = 'ankr12345678'
+
 const logOn = false
 const log = {
   info: (...logList) => {
@@ -84,6 +87,11 @@ const authenticateWithTestAcct = () => authenticate({
   password: testPassword
 })
 
+const authenticateWithTestAcct_changepass = () => authenticate({
+  email: testEmail,
+  password: testPassword1
+})
+
 const req =
   (method, path, data = {}, headers = {}) => {
     const opt = {
@@ -114,25 +122,36 @@ const reqA =
     })
   }
 
+  const reqAWithToken =
+  (accessToken, method, path, data = {}) => {
+      log.info("--------->>>>>><<<<<<---------- access tokenWithToken", method, path, data, accessToken)
+    return req(method, path, data, {
+      Authorization: `Bearer ${accessToken}`
+    })
+  }
+
 const toTS = (str) => (new Date(str)).getTime()
 
 global.chai = chai
 global.expect = expect
 global.authenticate = authenticate
 global.authenticateWithTestAcct = authenticateWithTestAcct
+global.authenticateWithTestAcct_changepass = authenticateWithTestAcct_changepass
 global.reqA = reqA
 global.log = log
 global.testEmail = testEmail
 global.testPassword = testPassword
 global.toTS = toTS
+global.setAuthentication = setAuthentication
+global.reqAWithToken = reqAWithToken
 
 module.exports = {
   GATEWAY,
   testEmail,
   testPassword,
   getAuthentication,
-  setAuthentication,
   authenticate,
   reqA,
+  reqAWithToken,
   log
 }
