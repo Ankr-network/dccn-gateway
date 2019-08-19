@@ -62,7 +62,7 @@ describe('DCCN User Manager', () => {
             const updateatt = await reqA('POST', '/update_attribute', 
                 {   user_attributes: [{
                     key: 'Name',
-                    value: 'ankrtest'}]
+                    value: 'ceceee'}]
                 }
             )
             name0 = loginfo.user.attributes.name
