@@ -1,4 +1,5 @@
-/*require('./common')
+/*
+require('./common')
 describe('DCCN Data Center Manager', () => {
     before(authenticateWithTestAcct)
     context('list_data_center', () => {
@@ -116,33 +117,35 @@ describe('DCCN Data Center Manager', () => {
             }
         })
     })
-    /* a registration needs the authorization and an account can just register once 
-    context('register_data_center', () => {
-        it('should register a new cluster', async () => {
-            const register_cluster = require('commander')
-            register_cluster
-                .option('--register_cluster_name <string>', 'type in an register cluster name', 'register_cluster_test')
-            register_cluster.parse(process.argv)
-            // check the input
-            try{
-                expect(register_cluster.register_cluster_name.length).to.be.at.least(0)
-            }
-            catch(e){
-                throw new Error("Please type in a valid cluster name (a string: at least length 0)")
-            }
-            const cluster = await reqA('POST', '/dc/register' , {
-                cluster_name: register_cluster.register_cluster_name}
-                )
-            expect(cluster.cluster_id).to.be.a('string')
-            expect(cluster.cluster_name).to.be.a('string')
-            expect(cluster.configmap).to.be.a('string')
-            expect(cluster.client_key).to.be.a('string')
-            expect(cluster.client_csr_cert).to.be.a('string')
-            if(reset_cluster.reset_cluster_name == ''){
-                expect(cluster.cluster_name).to.be.equal('unknow')
-            }else{
-                expect(cluster.cluster_name).to.be.equal(register_cluster.register_cluster_name)
-            }
-        })
-    })
-})*/
+    
+    // a registration needs the authorization and an account can just register once 
+    // context('register_data_center', () => {
+    //     it('should register a new cluster', async () => {
+    //         const register_cluster = require('commander')
+    //         register_cluster
+    //             .option('--register_cluster_name <string>', 'type in an register cluster name', 'register_cluster_test')
+    //         register_cluster.parse(process.argv)
+    //         // check the input
+    //         try{
+    //             expect(register_cluster.register_cluster_name.length).to.be.at.least(0)
+    //         }
+    //         catch(e){
+    //             throw new Error("Please type in a valid cluster name (a string: at least length 0)")
+    //         }
+    //         const cluster = await reqA('POST', '/dc/register' , {
+    //             cluster_name: register_cluster.register_cluster_name}
+    //             )
+    //         expect(cluster.cluster_id).to.be.a('string')
+    //         expect(cluster.cluster_name).to.be.a('string')
+    //         expect(cluster.configmap).to.be.a('string')
+    //         expect(cluster.client_key).to.be.a('string')
+    //         expect(cluster.client_csr_cert).to.be.a('string')
+    //         if(reset_cluster.reset_cluster_name == ''){
+    //             expect(cluster.cluster_name).to.be.equal('unknow')
+    //         }else{
+    //             expect(cluster.cluster_name).to.be.equal(register_cluster.register_cluster_name)
+    //         }
+    //     })
+    // })
+})
+*/
