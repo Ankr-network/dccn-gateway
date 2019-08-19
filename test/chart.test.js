@@ -4,36 +4,48 @@ describe('DCCN Chart Manager', () => {
     before(authenticateWithTestAcct)
     context('chart_list', () => {
         it('should list stable charts with length > 0', async () => {
-            const chartList = await reqA('GET', '/chart/list')
-            log.info('chartList', JSON.stringify(chartList, null, '  '))
-            expect(chartList.charts.length).to.be.least(1)
+            // case 1: list stable charts
+            console.log("case 1: list stable charts ")
+            const chartList1 = await reqA('GET', '/chart/list')
+            log.info('chartList', JSON.stringify(chartList1, null, '  '))
+            expect(chartList1.charts.length).to.be.least(1)
+            console.log("case 1 pass !")
+            // case 1 done !
+
+            //case 2: list user charts
+            console.log("case 2: list user charts")
+            const chartList2 = await reqA('GET', '/chart/list', {chart_repo: 'user'})
+            log.info('chartList', JSON.stringify(chartList2, null, '  '))
+            expect(chartList2.charts.length).to.be.least(0)
+            console.log("case 2 pass !")
+            // case 2 done !
         })
-        it('should list user charts with length == 0', async () => {
-            const chartList = await reqA('GET', '/chart/list', {chart_repo: 'user'})
-            log.info('chartList', JSON.stringify(chartList, null, '  '))
-            expect(chartList.charts.length).to.be.least(0)
-        })  
     })
 
     context('chart_detail', () => {
         it('should list charts details by ', async () => {
-            const chartList = await reqA('GET', '/chart/list')
-            expect(chartList.charts.length).to.be.least(1)
-            const chart = chartList.charts[0]
+            // case 1: regular charts
+            console.log("case 1: regular charts")
+            const chartList1 = await reqA('GET', '/chart/list')
+            expect(chartList1.charts.length).to.be.least(1)
+            const chart = chartList1.charts[0]
             repo = chart.chart_repo
             name = chart.chart_name
             ver = chart.chart_latest_version
             path = '/chart/detail/' + repo + '/' + name + '/' + ver
-            const chart_detail = await reqA('GET', path)
-            expect(chart_detail.chart_version_details.length).to.be.at.least(1)
-        })
+            const chart_detail1 = await reqA('GET', path)
+            expect(chart_detail1.chart_version_details.length).to.be.at.least(1)
+            console.log("case 1 pass !")
+            // case 1 done !
 
-        // Zilliqa
-        it('should list charts details by ', async () => {
+            // case 2: Zilliqa
+            console.log("case 2: Zilliqa")
             path = '/chart/detail/stable/zilliqa/0.1.0'
-            const chart_detail = await reqA('GET', path)         
-            expect(chart_detail.custom_values.length).to.be.at.least(1)
-        })
+            const chart_detail2 = await reqA('GET', path)         
+            expect(chart_detail2.custom_values.length).to.be.at.least(1)
+            console.log("case 2 pass !")
+            // case 2 done !
+        }).timeout(4000)
     })
 
     context('chart_download', () => {
