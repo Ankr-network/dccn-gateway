@@ -6,6 +6,9 @@ describe('DCCN Namespace Manager', () => {
     context('namespace_create', () => {
         // regular inputs
         it('should create a namespace', async () => {
+
+            // case 1: regular inputs
+            console.log("case 1: regular inputs")
             const namespace_info = require('commander')
             namespace_info
                 .option('--ns_create_name <string>', 'type in a create namespace name', 'ns_create_test')
@@ -62,10 +65,11 @@ describe('DCCN Namespace Manager', () => {
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
-        }).timeout(20000)
+            console.log("case 1 pass !")
+            // case 1 done !
 
-        // zero inputs
-        it('cannot create a namespace with zero inputs, should throw an error', async () => {
+            // case 2: zero inputs
+            console.log("case 2: zero inputs")
             var flag = 0
             try{
                 await reqA('POST', '/namespace/create', {
@@ -81,7 +85,9 @@ describe('DCCN Namespace Manager', () => {
             if (flag == 0) {
                 throw new Error("should not create a namespace with zero inputs")
             }
-        })
+            console.log("case 2 pass !")
+            // case 2 done !
+        }).timeout(40000)
     })
 
     context('list_namespaces', () => {
@@ -162,7 +168,7 @@ describe('DCCN Namespace Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(10000)
 
             // check the update results
             var label_updated = false
@@ -185,12 +191,12 @@ describe('DCCN Namespace Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(10000)
 
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
-        }).timeout(30000)
+        }).timeout(40000)
     })
 
     context('delete_namespace', () => {
@@ -210,7 +216,7 @@ describe('DCCN Namespace Manager', () => {
                     continue
                 }
             }
-            sleep(8000)
+            sleep(10000)
 
             // delete the namespace
             path = '/namespace/delete/' + namespace.ns_id
@@ -223,7 +229,7 @@ describe('DCCN Namespace Manager', () => {
                     continue
                 }
             }
-            sleep(8000)            
+            sleep(10000)            
 
             // check delete results
             const delete_nsList = await reqA('GET', '/namespace/list')
@@ -233,22 +239,6 @@ describe('DCCN Namespace Manager', () => {
                     break
                 }
             } 
-        }).timeout(30000)
+        }).timeout(40000)
     })
-
-    /*context('delete_namespace', () => {
-        it('should delete all namespace', async () => {
-            const nsList = await reqA('GET', '/namespace/list')
-            expect(nsList.ns_reports.length).to.be.at.least(1)
-            const deleteNSs = await Promise.all(nsList.ns_reports.map(ns => reqA('DELETE', `/namespace/delete/${ns.namespace.ns_id}`)))
-            expect(deleteNSs.length).to.be.at.least(1)
-            // deleteNSs.forEach(deleteNS => {
-            //     expect(deleteNS).to.be.an('object')
-            // })
-            const nsListAfter = await reqA('GET', '/namespace/list')
-            nsListAfter.ns_reports.forEach(r => {
-                expect(r.ns_status).to.be.equal('NS_CANCELING')
-            })
-        })
-    })*/
 })
