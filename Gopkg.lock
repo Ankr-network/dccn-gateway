@@ -2,8 +2,8 @@
 
 
 [[projects]]
-  branch = "develop"
-  digest = "1:c628a54a18017c5b625b3d983252a4a7a887420ea9ed609b8469daafabc8e3be"
+  branch = "feature/SWDEV-411-UpdateExternal"
+  digest = "1:5ef8886d2df9358be8c1df0733d3e1f692cf22a41dbf276262fa1774293653c4"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -14,7 +14,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "727d805e74614ccfcf9c95c0088ad1fbc965b731"
+  revision = "ed903e9983e181de6e5e9e950a8a8ceb54f96ab4"
 
 [[projects]]
   branch = "master"
@@ -54,8 +54,8 @@
     "utilities",
   ]
   pruneopts = "UT"
-  revision = "ad529a448ba494a88058f9e5be0988713174ac86"
-  version = "v1.9.5"
+  revision = "fd2d159495beeea56e2b747d3d4b68299a81210c"
+  version = "v1.9.6"
 
 [[projects]]
   branch = "master"
@@ -117,7 +117,7 @@
     "protobuf/field_mask",
   ]
   pruneopts = "UT"
-  revision = "fa694d86fc64c7654a660f8908de4e879866748d"
+  revision = "24fa4b261c55da65468f2abfdae2b024eef27dfb"
 
 [[projects]]
   digest = "1:3b97661db2e5d4c87f7345e875ea28f911e54c715ba0a74be08e1649d67e05cd"
