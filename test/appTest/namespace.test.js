@@ -2,7 +2,12 @@ require('./common')
 
 describe('DCCN Namespace Manager', () => {
     before(authenticateWithTestAcct)
-
+    function sleep(delay) {
+        var start = (new Date()).getTime()
+        while((new Date()).getTime() - start < delay) {
+            continue
+        }
+    }
     context('namespace_create', () => {
         // regular inputs
         it('should create a namespace', async () => {
@@ -12,9 +17,9 @@ describe('DCCN Namespace Manager', () => {
             const namespace_info = require('commander')
             namespace_info
                 .option('--ns_create_name <string>', 'type in a create namespace name', 'ns_create_test')
-                .option('--ns_create_cpu_limit <int>', 'type in a create namespace cpu limit', 1000)
-                .option('--ns_create_mem_limit <int>', 'type in a create namespace mem limit', 2048)
-                .option('--ns_create_storage_limit <int>', 'type in a create namespace storage limit', 8)
+                .option('--ns_create_cpu_limit <int>', 'type in a create namespace cpu limit', 101)
+                .option('--ns_create_mem_limit <int>', 'type in a create namespace mem limit', 300)
+                .option('--ns_create_storage_limit <int>', 'type in a create namespace storage limit', 2)
             namespace_info.parse(process.argv)
             // check the input
             try{
@@ -52,14 +57,6 @@ describe('DCCN Namespace Manager', () => {
                 ns_storage_limit: namespace_info.ns_create_storage_limit
             })
             expect(namespace.ns_id.length).to.be.at.least(1)
-            
-            // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
             sleep(8000)
             
             // delete the namespace created
@@ -110,26 +107,20 @@ describe('DCCN Namespace Manager', () => {
             // create a new namespace for update
             const namespace = await reqA('POST', '/namespace/create', {
                 ns_name: 'ns_update_test',
-                ns_cpu_limit: 1000,
-                ns_mem_limit: 2048,
-                ns_storage_limit: 8
+                ns_cpu_limit: 101,
+                ns_mem_limit: 300,
+                ns_storage_limit: 2
             })
 
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
-            sleep(8000)            
+            sleep(15000)            
             
             // update a namespace info
             const namespace_info = require('commander')
             namespace_info
-                .option('--ns_update_cpu_limit <int>', 'type in an update namespace cpu limit', 100)
-                .option('--ns_update_mem_limit <int>', 'type in an update namespace mem limit', 256)
-                .option('--ns_update_storage_limit <int>', 'type in an update namespace storage limit', 2)
+                .option('--ns_update_cpu_limit <int>', 'type in an update namespace cpu limit', 200)
+                .option('--ns_update_mem_limit <int>', 'type in an update namespace mem limit', 400)
+                .option('--ns_update_storage_limit <int>', 'type in an update namespace storage limit', 4)
             namespace_info.parse(process.argv)
             
             // check the input
@@ -162,13 +153,7 @@ describe('DCCN Namespace Manager', () => {
             })
             
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
-            sleep(10000)
+            sleep(12000)
 
             // check the update results
             var label_updated = false
@@ -185,18 +170,12 @@ describe('DCCN Namespace Manager', () => {
             expect(label_updated).to.equal(true)
 
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
             sleep(10000)
 
             // delete the namespace created
             path = '/namespace/delete/' + namespace.ns_id
             await reqA('DELETE', path)
-        }).timeout(40000)
+        }).timeout(200000)
     })
 
     context('delete_namespace', () => {
@@ -204,18 +183,12 @@ describe('DCCN Namespace Manager', () => {
             // create a new namespace for delete
             const namespace = await reqA('POST', '/namespace/create', {
                 ns_name: 'ns_delete_test',
-                ns_cpu_limit: 1000,
-                ns_mem_limit: 2048,
-                ns_storage_limit: 8
+                ns_cpu_limit: 101,
+                ns_mem_limit: 300,
+                ns_storage_limit: 2
             })
 
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
             sleep(10000)
 
             // delete the namespace
@@ -223,22 +196,16 @@ describe('DCCN Namespace Manager', () => {
             await reqA('DELETE', path)
 
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
             sleep(10000)            
 
             // check delete results
             const delete_nsList = await reqA('GET', '/namespace/list')
             for (i = 0; i < delete_nsList.ns_reports.length; i++){
                 if(delete_nsList.ns_reports[i].namespace.ns_id == namespace.ns_id){
-                    expect(delete_nsList.ns_reports[i].ns_status).to.equal('NS_CANCELED')
+                    expect(delete_nsList.ns_reports[i].ns_status).to.oneOf(['NS_CANCELING', 'NS_CANCELED'])
                     break
                 }
             } 
-        }).timeout(40000)
+        }).timeout(200000)
     })
 })

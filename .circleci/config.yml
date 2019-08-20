@@ -81,8 +81,16 @@ jobs:
           name: Install
           command: npm install commander
       - run:
-          name: Test
+          name: Install
+          command: npm install --save-dev mocha
+      - run:
+          name: userTest
+          command: npm start
+      - run:
+          name: AppTest
           command: npm test
+
+
 workflows:
   version: 2
   build_and_test:

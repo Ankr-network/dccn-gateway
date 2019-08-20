@@ -113,6 +113,59 @@ describe('DCCN Chart Manager', () => {
         })
     })
 
+    context('chart_saveas', () => {
+        it('should save_as chart', async () => {
+        // wait for app status changed
+            function sleep(delay) {
+                var start = (new Date()).getTime()
+                while((new Date()).getTime() - start < delay) {
+                    continue
+                }
+            }
+            sleep(15000)
+
+            const chartList = await reqA('GET', '/chart/list')
+            expect(chartList.charts.length).to.be.least(1)
+            const chart = chartList.charts[0]
+            const repo = chart.chart_repo
+            const name = chart.chart_name
+            const ver = chart.chart_latest_version
+            const download_path = '/chart/download/' + repo + '/' + name + '/' + ver
+            const file = await reqA('GET', download_path) 
+
+            const chart_info = require('commander')
+            chart_info
+                .option('--saveas_name <string>', 'type in a saveas chart name', 'saveas_chart_test')
+                .option('--saveas_ver <string>', 'type in a saveas chart version', '8.8.8')
+            chart_info.parse(process.argv)
+            var label = false
+            sleep(60000)
+            await reqA('PUT', '/chart/saveas', {
+                source: {
+                    chart_repo: repo,
+                    chart_ver: ver,
+                    chart_name: name
+                },
+                destination: {
+                    saveas_ver: chart_info.saveas_ver,
+                    saveas_name: chart_info.saveas_name
+                },
+                values_yaml: file.chart_file
+            })
+            const new_chartList = await reqA('GET', '/chart/list', {chart_repo: 'user'})
+            for (i = 0; i < new_chartList.charts.length; i++){
+                if(new_chartList.charts[i].chart_name == chart_info.saveas_name){
+                    label = true
+                    expect(new_chartList.charts[i].chart_latest_version).to.equal(chart_info.saveas_ver)
+                    break
+                }
+            }           
+            expect(label).to.equal(true)
+            delete_path = '/chart/delete/' + 'user' + '/' + chart_info.saveas_name + '/' + chart_info.saveas_ver
+            await reqA('DELETE', delete_path)
+        }).timeout(120000)
+    })
+
     context('chart_delete', () => {
         it('should delete chart by chart info', async () => {
             const chartList = await reqA('GET', '/chart/list')
@@ -140,50 +193,6 @@ describe('DCCN Chart Manager', () => {
                 }
             }  
             expect(label).to.equal(false)
-        })
-    })
-
-    
-    context('chart_saveas', () => {
-        it('should save_as chart', async () => {
-            const chartList = await reqA('GET', '/chart/list')
-            expect(chartList.charts.length).to.be.least(1)
-            const chart = chartList.charts[0]
-            const repo = chart.chart_repo
-            const name = chart.chart_name
-            const ver = chart.chart_latest_version
-            const download_path = '/chart/download/' + repo + '/' + name + '/' + ver
-            const file = await reqA('GET', download_path) 
-
-            const chart_info = require('commander')
-            chart_info
-                .option('--saveas_name <string>', 'type in a saveas chart name', 'saveas_chart_test')
-                .option('--saveas_ver <string>', 'type in a saveas chart version', '8.8.8')
-            chart_info.parse(process.argv)
-            var label = false
-            await reqA('PUT', '/chart/saveas', {
-                source: {
-                    chart_repo: repo,
-                    chart_ver: ver,
-                    chart_name: name
-                },
-                destination: {
-                    saveas_ver: chart_info.saveas_ver,
-                    saveas_name: chart_info.saveas_name
-                },
-                values_yaml: file.chart_file
-            })
-            const new_chartList = await reqA('GET', '/chart/list', {chart_repo: 'user'})
-            for (i = 0; i < new_chartList.charts.length; i++){
-                if(new_chartList.charts[i].chart_name == chart_info.saveas_name){
-                    label = true
-                    expect(new_chartList.charts[i].chart_latest_version).to.equal(chart_info.saveas_ver)
-                    break
-                }
-            }           
-            expect(label).to.equal(true)
-            delete_path = '/chart/delete/' + 'user' + '/' + chart_info.saveas_name + '/' + chart_info.saveas_ver
-            await reqA('DELETE', delete_path)
         })
     })
 })
