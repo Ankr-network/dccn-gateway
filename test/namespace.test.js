@@ -239,6 +239,6 @@ describe('DCCN Namespace Manager', () => {
                     break
                 }
             } 
-        }).timeout(40000)
+        }).timeout(60000)
     })
 })

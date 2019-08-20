@@ -146,6 +146,15 @@ describe('DCCN Chart Manager', () => {
     
     context('chart_saveas', () => {
         it('should save_as chart', async () => {
+        // wait for app status changed
+            function sleep(delay) {
+                var start = (new Date()).getTime()
+                while((new Date()).getTime() - start < delay) {
+                    continue
+                }
+            }
+            sleep(15000)
+
             const chartList = await reqA('GET', '/chart/list')
             expect(chartList.charts.length).to.be.least(1)
             const chart = chartList.charts[0]
@@ -184,6 +193,6 @@ describe('DCCN Chart Manager', () => {
             expect(label).to.equal(true)
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.saveas_name + '/' + chart_info.saveas_ver
             await reqA('DELETE', delete_path)
-        })
+        }).timeout(40000)
     })
 })

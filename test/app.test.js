@@ -3,7 +3,6 @@ require('./common')
 describe('DCCN Application Manager', () => {
     before(authenticateWithTestAcct)
     context('update_application', () => {
-        
         it('should update the application', async () => {
             // case 1: correct input
             // create an app for app_update
@@ -625,7 +624,7 @@ describe('DCCN Application Manager', () => {
                     continue
                 }
             }
-            sleep(15000)
+            sleep(60000)
 
             const nsList = await reqA('GET', '/namespace/list')
             for (i = 0; i < nsList.ns_reports.length; i++){
@@ -635,6 +634,6 @@ describe('DCCN Application Manager', () => {
                     await reqA('DELETE', path)
                 } 
             }
-        }).timeout(30000)
+        }).timeout(120000)
     })
 })
