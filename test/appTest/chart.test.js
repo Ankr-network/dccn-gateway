@@ -113,9 +113,6 @@ describe('DCCN Chart Manager', () => {
         })
     })
 
-    
-
-    
     context('chart_saveas', () => {
         it('should save_as chart', async () => {
         // wait for app status changed
@@ -142,6 +139,7 @@ describe('DCCN Chart Manager', () => {
                 .option('--saveas_ver <string>', 'type in a saveas chart version', '8.8.8')
             chart_info.parse(process.argv)
             var label = false
+            sleep(60000)
             await reqA('PUT', '/chart/saveas', {
                 source: {
                     chart_repo: repo,
@@ -165,7 +163,7 @@ describe('DCCN Chart Manager', () => {
             expect(label).to.equal(true)
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.saveas_name + '/' + chart_info.saveas_ver
             await reqA('DELETE', delete_path)
-        }).timeout(40000)
+        }).timeout(120000)
     })
 
     context('chart_delete', () => {

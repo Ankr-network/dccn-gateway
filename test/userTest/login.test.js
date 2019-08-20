@@ -11,7 +11,7 @@ describe('DCCN User Manager', () => {
                 for (var i = 0; i < 10; i++){
                     const loginfo = await reqA('POST', '/login',{
                     email: 'ankrtestuser1@mailinator.com',
-                    password: 'ankr12345678'
+                    password: 'Ankr12345678'
                 })        
                 log.info('login', JSON.stringify(loginfo, null, ' '))
                 console.log(loginfo.user.attributes.value)

@@ -21,8 +21,10 @@
     "chai-as-promised": "^7.1.1",
     "command": "0.0.5",
     "commander": "^2.20.0",
-    "mocha": "^6.1.4",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
   }
 }
