@@ -17,7 +17,7 @@ describe('DCCN User Manager', () => {
             
             const loginfo = await reqA('POST', '/login',{
                 email: 'ankrtestuser1@mailinator.com',
-                password: 'ankr1234',
+                password: 'ankr12345678',
             })
             log.info('login', JSON.stringify(loginfo, null, ' '))
             console.log(loginfo.user.attributes.value)
@@ -30,7 +30,7 @@ describe('DCCN User Manager', () => {
         it('should send a logout request', async () => {
             const loginfo = await reqA('POST', '/login',{
                 email: 'ankrtestuser1@mailinator.com',
-                password: 'ankr1234',
+                password: 'ankr12345678',
             })
             const logoutinfo = await reqA('POST', '/logout',{
                 refresh_token: loginfo.authentication_result.refresh_token
@@ -45,7 +45,7 @@ describe('DCCN User Manager', () => {
         it('should send a refresh request', async () => {
             const loginfo = await reqA('POST', '/login',{
                 email: 'ankrtestuser1@mailinator.com',
-                password: 'ankr1234',
+                password: 'ankr12345678',
             })
             //refreshtoken0: loginfo.authentication_result.refresh_token
             const refreshtoken = await reqA('POST', '/refresh',{
@@ -65,7 +65,7 @@ describe('DCCN User Manager', () => {
         it('should send an update attribute request', async () => {
             const loginfo = await reqA('POST', '/login',{
                 email: 'ankrtestuser1@mailinator.com',
-                password: 'ankr1234',
+                password: 'ankr12345678',
             })
             //console.log(loginfo.user.attributes.extra_fields)
             const updateatt = await reqA('POST', '/update_attribute', 
@@ -147,19 +147,19 @@ describe('DCCN User Manager', () => {
             const list = await reqA('GET', '/team/list', {uid:"57a50ca4-5799-42c2-aab2-a532ec8d6965"})
             const loginfo = await reqA('POST', '/login',{
                 email: 'ankrtestuser1@mailinator.com',
-                password: 'ankr1234',
+                password: 'ankr12345678',
             })
             console.log(loginfo.authentication_result.access_token.length)
             expect(loginfo.authentication_result.access_token.length).to.be.at.least(0)
             //expect loginfo.status 
             
             const changepass = await reqA('POST', '/change_password',{
-                old_password: 'ankr1234' ,
-                new_password: 'ankr12345678'
+                old_password: 'ankr12345678' ,
+                new_password: 'ankr1234'
             })
             const loginfo2 = await reqA('POST', '/login',{
                 email: 'ankrtestuser1@mailinator.com',
-                password: 'ankr12345678'
+                password: 'ankr1234'
             })
             console.log(loginfo2.authentication_result.access_token.length)
             expect(loginfo2.authentication_result.access_token.length).to.be.at.least(0)
@@ -168,8 +168,8 @@ describe('DCCN User Manager', () => {
             testAccessToken = loginfo2.authentication_result.access_token
             //await authenticateWithTestAcct_changepass()
             const changepass2 = await reqAWithToken(testAccessToken, 'POST', '/change_password',{
-                old_password: 'ankr12345678' ,
-                new_password: 'ankr1234'
+                old_password: 'ankr1234' ,
+                new_password: 'ankr12345678'
             })
             log.info('changepass', JSON.stringify(changepass, null, ' '))
             log.info('changepass2', JSON.stringify(changepass2, null, ' '))
