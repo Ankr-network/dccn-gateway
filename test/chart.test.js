@@ -113,35 +113,7 @@ describe('DCCN Chart Manager', () => {
         })
     })
 
-    context('chart_delete', () => {
-        it('should delete chart by chart info', async () => {
-            const chartList = await reqA('GET', '/chart/list')
-            expect(chartList.charts.length).to.be.least(1)
-            const chart = chartList.charts[0]
-            const repo = chart.chart_repo
-            const name = chart.chart_name
-            const ver = chart.chart_latest_version
-            const download_path = '/chart/download/' + repo + '/' + name + '/' + ver
-            const file = await reqA('GET', download_path)   
-            const upload_name = 'delete_charts_test_01'
-            const upload_ver = '9.9.9'
-            const upload_path = '/chart/upload/' + 'user' + '/' + upload_name + '/' + upload_ver
-            await reqA('POST', upload_path,{
-                chart_file: file.chart_file
-            })
-            var label = false
-            delete_path = '/chart/delete/' + 'user' + '/' + upload_name + '/' + upload_ver
-            await reqA('DELETE', delete_path)
-            const new_chartList = await reqA('GET', '/chart/list', {chart_repo: 'user'})
-            for (i = 0; i < new_chartList.charts.length; i++){
-                if(new_chartList.charts[i].chart_name == upload_name){
-                    label = true
-                    break
-                }
-            }  
-            expect(label).to.equal(false)
-        })
-    })
+    
 
     
     context('chart_saveas', () => {
@@ -194,5 +166,35 @@ describe('DCCN Chart Manager', () => {
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.saveas_name + '/' + chart_info.saveas_ver
             await reqA('DELETE', delete_path)
         }).timeout(40000)
+    })
+
+    context('chart_delete', () => {
+        it('should delete chart by chart info', async () => {
+            const chartList = await reqA('GET', '/chart/list')
+            expect(chartList.charts.length).to.be.least(1)
+            const chart = chartList.charts[0]
+            const repo = chart.chart_repo
+            const name = chart.chart_name
+            const ver = chart.chart_latest_version
+            const download_path = '/chart/download/' + repo + '/' + name + '/' + ver
+            const file = await reqA('GET', download_path)   
+            const upload_name = 'delete_charts_test_01'
+            const upload_ver = '9.9.9'
+            const upload_path = '/chart/upload/' + 'user' + '/' + upload_name + '/' + upload_ver
+            await reqA('POST', upload_path,{
+                chart_file: file.chart_file
+            })
+            var label = false
+            delete_path = '/chart/delete/' + 'user' + '/' + upload_name + '/' + upload_ver
+            await reqA('DELETE', delete_path)
+            const new_chartList = await reqA('GET', '/chart/list', {chart_repo: 'user'})
+            for (i = 0; i < new_chartList.charts.length; i++){
+                if(new_chartList.charts[i].chart_name == upload_name){
+                    label = true
+                    break
+                }
+            }  
+            expect(label).to.equal(false)
+        })
     })
 })
