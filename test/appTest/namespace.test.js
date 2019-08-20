@@ -113,7 +113,7 @@ describe('DCCN Namespace Manager', () => {
             })
 
             // wait for namespace status changed
-            sleep(12000)            
+            sleep(15000)            
             
             // update a namespace info
             const namespace_info = require('commander')
@@ -153,12 +153,6 @@ describe('DCCN Namespace Manager', () => {
             })
             
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
             sleep(12000)
 
             // check the update results
@@ -176,12 +170,6 @@ describe('DCCN Namespace Manager', () => {
             expect(label_updated).to.equal(true)
 
             // wait for namespace status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
             sleep(10000)
 
             // delete the namespace created
