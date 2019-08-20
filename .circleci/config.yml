@@ -85,10 +85,10 @@ jobs:
           command: npm install --save-dev mocha
       - run:
           name: userTest
-          command: mocha test/userTest/*.test.js
+          command: npm start
       - run:
           name: AppTest
-          command: mocha test/appTest/*.test.js
+          command: npm test
 
 
 workflows:
