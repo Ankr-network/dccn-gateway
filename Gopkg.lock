@@ -2,8 +2,8 @@
 
 
 [[projects]]
-  branch = "feature/SWDEV-411-UpdateExternal"
-  digest = "1:5ef8886d2df9358be8c1df0733d3e1f692cf22a41dbf276262fa1774293653c4"
+  branch = "develop"
+  digest = "1:57dbc9e13368136d993d60d6b778f7836235789d2b587479523b499e3df6c427"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
@@ -14,7 +14,7 @@
     "protos/gateway/usermgr/v1",
   ]
   pruneopts = "UT"
-  revision = "ed903e9983e181de6e5e9e950a8a8ceb54f96ab4"
+  revision = "ed7a9111cff0290546d9003c575e80f95e30bb68"
 
 [[projects]]
   branch = "master"

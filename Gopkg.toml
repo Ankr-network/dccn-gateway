@@ -26,7 +26,7 @@
 
 
 [[constraint]]
-  branch = "feature/SWDEV-411-UpdateExternal"
+  branch = "develop"
   name = "github.com/Ankr-network/dccn-common"
 
 [[constraint]]
