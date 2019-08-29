@@ -13,6 +13,7 @@ import (
 	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
 	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
+	gwteammgr "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -48,14 +49,14 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 		code = "NotFoundError"
 		errors = "This Api is not Implemented"
 	} else {
-	code = strings.Split(grpc.ErrorDesc(err), ":")[1]
-	errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+	if len(strings.Split(grpc.ErrorDesc(err), ":")) >= 3 {
+		code = strings.Split(grpc.ErrorDesc(err), ":")[1]
+		errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+		} else {
+		code = "Invalid Format"
+		errors = "Invalid Format Error" 
+		}
 	}
-/*	if len(strings.Split(grpc.ErrorDesc(err), ":")[2])>23 {
-		code = strings.Split(grpc.ErrorDesc(err), ":")[2][23:]
-		errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[3:], ":")
-	}*/
-
     jErr := json.NewEncoder(w).Encode(errorBody{
 		Err: errors,
 		Code: code,
@@ -105,7 +106,20 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 	if err != nil {
 		return nil, err
 	}
+	err = gwlogmgr.RegisterLogMgrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
 
+	err = gwteammgr.RegisterTeamMgrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+
+	err = gwteammgr.RegisterTeamMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
 	return mux, nil
 }
 
