@@ -1,5 +1,9 @@
 require('./common')
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 describe('DCCN Chart Manager', () => {
     before(authenticateWithTestAcct)
     context('chart_list', () => {
@@ -45,7 +49,7 @@ describe('DCCN Chart Manager', () => {
             expect(chart_detail2.custom_values.length).to.be.at.least(1)
             console.log("case 2 pass !")
             // case 2 done !
-        }).timeout(4000)
+        }).timeout(200000)
     })
 
     context('chart_download', () => {
@@ -60,7 +64,7 @@ describe('DCCN Chart Manager', () => {
             const file = await reqA('GET', path)
             expect(file.chart_file.length).to.be.at.least(1)
         })
-    }).timeout(4000)
+    }).timeout(200000)
 
     context('chart_upload', () => {
         it('should upload a chart file', async () => {
@@ -110,19 +114,13 @@ describe('DCCN Chart Manager', () => {
             expect(label_upload).to.equal(true)
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.upload_name + '/' + chart_info.upload_ver
             await reqA('DELETE', delete_path)
-        })
+        }).timeout(200000)
     })
 
     context('chart_saveas', () => {
         it('should save_as chart', async () => {
         // wait for app status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
-            sleep(15000)
+            await sleep(15000)
 
             const chartList = await reqA('GET', '/chart/list')
             expect(chartList.charts.length).to.be.least(1)
@@ -139,7 +137,9 @@ describe('DCCN Chart Manager', () => {
                 .option('--saveas_ver <string>', 'type in a saveas chart version', '8.8.8')
             chart_info.parse(process.argv)
             var label = false
-            sleep(60000)
+            
+            await sleep(60000)
+            
             await reqA('PUT', '/chart/saveas', {
                 source: {
                     chart_repo: repo,
@@ -163,7 +163,7 @@ describe('DCCN Chart Manager', () => {
             expect(label).to.equal(true)
             delete_path = '/chart/delete/' + 'user' + '/' + chart_info.saveas_name + '/' + chart_info.saveas_ver
             await reqA('DELETE', delete_path)
-        }).timeout(120000)
+        }).timeout(200000)
     })
 
     context('chart_delete', () => {
@@ -193,6 +193,6 @@ describe('DCCN Chart Manager', () => {
                 }
             }  
             expect(label).to.equal(false)
-        })
+        }).timeout(200000)
     })
 })
