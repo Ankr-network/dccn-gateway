@@ -5,10 +5,6 @@ chai.use(chaiAsPromised)
 
 const expect = chai.expect
 const GATEWAY = 'https://gateway-stage.dccn.ankr.com'
-const testEmail = 'ankrtestuser1@mailinator.com'
-const testPassword = 'Ankr12345678'
-
-const testPassword1 = 'Ankr1234'
 
 const logOn = false
 const log = {
@@ -82,14 +78,9 @@ const authenticate =
         })
   }
 
-const authenticateWithTestAcct = () => authenticate({
-  email: testEmail,
-  password: testPassword
-})
-
-const authenticateWithTestAcct_changepass = () => authenticate({
-  email: testEmail,
-  password: testPassword1
+authenticateWithTestAcct = (email, password) => authenticate({
+  email: email,
+  password: password
 })
 
 const req =
@@ -136,22 +127,20 @@ global.chai = chai
 global.expect = expect
 global.authenticate = authenticate
 global.authenticateWithTestAcct = authenticateWithTestAcct
-global.authenticateWithTestAcct_changepass = authenticateWithTestAcct_changepass
+global.req = req
 global.reqA = reqA
 global.log = log
-global.testEmail = testEmail
-global.testPassword = testPassword
 global.toTS = toTS
 global.setAuthentication = setAuthentication
 global.reqAWithToken = reqAWithToken
 
 module.exports = {
   GATEWAY,
-  testEmail,
-  testPassword,
   getAuthentication,
   authenticate,
+  authenticateWithTestAcct,
   reqA,
+  req,
   reqAWithToken,
   log
 }
