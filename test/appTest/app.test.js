@@ -411,8 +411,8 @@ describe('DCCN Application Manager', () => {
             // purge the app created
             const delete_case1 = "/app/purge/" + app1.app_id
             await reqA('DELETE', delete_case1)
-            const delete_case2 = "/app/purge/" + app2.app_id
-            await reqA('DELETE', delete_case2)
+            // const delete_case2 = "/app/purge/" + app2.app_id
+            // await reqA('DELETE', delete_case2)
             const delete_case3 = "/app/purge/" + app3.app_id
             await reqA('DELETE', delete_case3)
             
