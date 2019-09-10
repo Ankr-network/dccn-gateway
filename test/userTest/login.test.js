@@ -8,12 +8,11 @@ describe('DCCN User Manager', () => {
     context('login',() => {
         it('should send a login request', async () => {
             try{
-                for (var i = 0; i < 10; i++){
-                    const loginfo = await reqA('POST', '/login',{
+                for (var i = 0; i < 8; i++){
+                    const loginfo = await req('POST', '/login',{
                     email: 'ankrtestuser1@mailinator.com',
                     password: 'Ankr12345678'
                 })        
-                log.info('login', JSON.stringify(loginfo, null, ' '))
                 console.log(loginfo.user.attributes.value)
                 expect(loginfo.authentication_result.access_token.length).to.be.at.least(0)
                 if(break_flag = 1){
@@ -26,8 +25,7 @@ describe('DCCN User Manager', () => {
         }
         if(flag = 0){
             throw new Error('error for logging in too many times')  
-        }
-    })
-})
-    
+            }
+        })
+    })  
 })

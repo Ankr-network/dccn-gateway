@@ -1,13 +1,11 @@
 require('./common')
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 describe('DCCN Application Manager', () => {
     before(authenticateWithTestAcct)
-    function sleep(delay) {
-        var start = (new Date()).getTime()
-        while((new Date()).getTime() - start < delay) {
-            continue
-        }
-    }
 
     context('update_application', () => {
         it('should update the application', async () => {
@@ -20,9 +18,9 @@ describe('DCCN Application Manager', () => {
             expect(chartList.charts.length).to.be.at.least(1)
             const chart = chartList.charts[0]
             const ns_app_update_test_name = 'ns_app_update_test'
-            const ns_app_update_test_cpu_limit = 101
-            const ns_app_update_test_mem_limit = 300
-            const ns_app_update_test_storage_limit = 2
+            const ns_app_update_test_cpu_limit = 1000
+            const ns_app_update_test_mem_limit = 2000
+            const ns_app_update_test_storage_limit = 50000
             const app = await reqA('POST', '/app/create', {
                 app_name: 'app_update_test',
                 chart: {
@@ -39,8 +37,7 @@ describe('DCCN Application Manager', () => {
             })
 
             // wait for app status changed
-            
-            sleep(15000)
+            await sleep(15000)
             
             // app update
             const app_info = require('commander')
@@ -70,7 +67,7 @@ describe('DCCN Application Manager', () => {
             })
             
             // wait for app status changed
-            sleep(10000)
+            await sleep(10000)
 
             // check the update results
             path_detail = '/app/detail/' + app.app_id
@@ -83,22 +80,22 @@ describe('DCCN Application Manager', () => {
             await reqA('DELETE', delete_path)
             // case 1 done !
             console.log("case 1 pass !")
-        }).timeout(120000)
+        }).timeout(200000)
     })
 
 
     context('create_application', () => {
         it('should create an application', async () => {
             // case 1: regular direct input
-            sleep(15000)
+            await sleep(20000)
             console.log("case 1: regular direct inputs")
             const app_info = require('commander')
             app_info
                 .option('--app_create_name <string>', 'type in a create app name', 'app_create_test')
                 .option('--app_create_ns_name <string>', 'type in a create namespace name', 'app_create_ns_test')
-                .option('--app_create_ns_cpu_limit <int>', 'type in a create namespace cpu limit', 101)
-                .option('--app_create_ns_mem_limit <int>', 'type in a create namespace mem limit', 300)
-                .option('--app_create_ns_storage_limit <int>', 'type in a create namespace storage limit', 2)
+                .option('--app_create_ns_cpu_limit <int>', 'type in a create namespace cpu limit', 1000)
+                .option('--app_create_ns_mem_limit <int>', 'type in a create namespace mem limit', 2000)
+                .option('--app_create_ns_storage_limit <int>', 'type in a create namespace storage limit', 50000)
                 .option('--app_create_customValue_key <string>', 'type in a customValue_key', 'app_create_customValue_key')
                 .option('--app_create_customValue_value <string>', 'type in a customValue_key', 'app_create_customValue_value')
             app_info.parse(process.argv)
@@ -174,9 +171,10 @@ describe('DCCN Application Manager', () => {
             })
             expect(app1.app_id).to.be.a('string')
             console.log("case 1 pass !")
-            sleep(10000)
+            await sleep(10000)
             // case 1: done!
 
+            /*
             // case 2: regular direct inputs for Zilliqa (plus customValues)
             console.log("casse 2: regular direct inputs for Zilliqa (plus customValues)")
             const app2 = await reqA('POST', '/app/create', {
@@ -207,16 +205,17 @@ describe('DCCN Application Manager', () => {
             })
             expect(app2.app_id).to.be.a('string')      
             console.log("case 2 pass !")
-            sleep(10000)
+            await sleep(10000)
             // case 2 done !
+            */
             
             // csae 3: regular inputs with create namespace first
             console.log("case 3: regular inputs with create namespace first")
             // create namespace first
             const ns_app_create_test_name = 'ns_app_create_test_namespace_first'
-            const ns_app_create_test_cpu_limit = 101
-            const ns_app_create_test_mem_limit = 300
-            const ns_app_create_test_storage_limit = 2
+            const ns_app_create_test_cpu_limit = 1000
+            const ns_app_create_test_mem_limit = 2000
+            const ns_app_create_test_storage_limit = 50000
             const namespace = await reqA('POST', '/namespace/create', {
                 ns_name: ns_app_create_test_name,
                 ns_cpu_limit: ns_app_create_test_cpu_limit,
@@ -224,7 +223,7 @@ describe('DCCN Application Manager', () => {
                 ns_storage_limit: ns_app_create_test_storage_limit
             })
             // wait for namespace status changed
-            sleep(20000)
+            await sleep(20000)
             const app3 = await reqA('POST', '/app/create', {
                 app_name: app_info.app_create_name,
                 chart: {
@@ -237,7 +236,7 @@ describe('DCCN Application Manager', () => {
 
             expect(app3.app_id).to.be.a('string')
             console.log("case 3 pass !")
-            sleep(10000)
+            await sleep(10000)
             // case 3 done !
 
             // case 4: empty name input
@@ -253,9 +252,9 @@ describe('DCCN Application Manager', () => {
                         },
                     namespace: {
                         ns_name: '',
-                        ns_cpu_limit: 101,
-                        ns_mem_limit: 300,
-                        ns_storage_limit: 2
+                        ns_cpu_limit: 1000,
+                        ns_mem_limit: 2000,
+                        ns_storage_limit: 50000
                         }
                     })
                 }
@@ -393,9 +392,9 @@ describe('DCCN Application Manager', () => {
                         },
                     namespace: {
                         ns_name: 'ns1test',
-                        ns_cpu_limit: 101,
-                        ns_mem_limit: 300,
-                        ns_storage_limit: 2
+                        ns_cpu_limit: 1000,
+                        ns_mem_limit: 2000,
+                        ns_storage_limit: 50000
                         }
                     })
                 }
@@ -408,22 +407,22 @@ describe('DCCN Application Manager', () => {
             console.log("case 9 pass !")
             // case 9 done!
 
-            sleep(30000)
+            await sleep(30000)
             // purge the app created
             const delete_case1 = "/app/purge/" + app1.app_id
             await reqA('DELETE', delete_case1)
-            const delete_case2 = "/app/purge/" + app2.app_id
-            await reqA('DELETE', delete_case2)
+            // const delete_case2 = "/app/purge/" + app2.app_id
+            // await reqA('DELETE', delete_case2)
             const delete_case3 = "/app/purge/" + app3.app_id
             await reqA('DELETE', delete_case3)
             
-        }).timeout(2000000)
+        }).timeout(400000)
     })
 
 
     context('get_application_overview', () => {
         it('should get overview of this user\s application', async () => {
-            sleep(15000)
+            await sleep(15000)
             const appOverview = await reqA('GET', '/app/overview')
             log.info('appOverview', JSON.stringify(appOverview, null, '  '))
             expect(appOverview.cluster_count).to.be.a('number')
@@ -441,7 +440,7 @@ describe('DCCN Application Manager', () => {
 
     context('list_application', () => {
         it('should list applications', async () => {
-            sleep(15000)
+            await sleep(15000)
             const appList = await reqA('GET', '/app/list')
             log.info('appList', JSON.stringify(appList, null, '  '))
             expect(appList.app_reports.length).to.be.at.least(0)
@@ -451,7 +450,7 @@ describe('DCCN Application Manager', () => {
     context('get_application_detail', () => {
         it('should get an application detail', async () => {
             // create an app for get_detail
-            sleep(15000)
+            await sleep(15000)
             const chartList = await reqA('GET', '/chart/list', {
                 chart_repo: 'stable'
             })
@@ -466,20 +465,13 @@ describe('DCCN Application Manager', () => {
                 },
                 namespace: {
                     ns_name: 'ns_app_detail_test',
-                    ns_cpu_limit: 101,
-                    ns_mem_limit: 300,
-                    ns_storage_limit: 2
+                    ns_cpu_limit: 1000,
+                    ns_mem_limit: 2000,
+                    ns_storage_limit: 50000
                 }
             })
 
-            // wait for app status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
-            sleep(10000)
+            await sleep(10000)
 
             // get app details
             path = "/app/detail/" + app.app_id
@@ -494,7 +486,7 @@ describe('DCCN Application Manager', () => {
             expect(toTS(appDetail.app_report.app_deployment.namespace.last_modified_date)).to.be.at.least(timeCutoff)
             
             // purge the app created
-            sleep(10000)
+            await sleep(10000)
             const delete_case = "/app/purge/" + app.app_id
             await reqA('DELETE', delete_case)
         }).timeout(200000)
@@ -503,7 +495,7 @@ describe('DCCN Application Manager', () => {
     context('cancel_application', () => {
         it('should cancel an application', async () => {
             // create an app for app_cancel
-            sleep(15000)
+            await sleep(15000)
             const chartList = await reqA('GET', '/chart/list', {
                 chart_repo: 'stable'
             })
@@ -518,20 +510,14 @@ describe('DCCN Application Manager', () => {
                 },
                 namespace: {
                     ns_name: 'ns_app_cancel_test',
-                    ns_cpu_limit: 101,
-                    ns_mem_limit: 300,
-                    ns_storage_limit: 2
+                    ns_cpu_limit: 1000,
+                    ns_mem_limit: 2000,
+                    ns_storage_limit: 50000
                 }
             })
 
             // wait for app status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
-            sleep(8000)
+            await sleep(8000)
 
             // cancel the app and check
             path_cancel = '/app/cancel/' + app.app_id
@@ -540,18 +526,13 @@ describe('DCCN Application Manager', () => {
             path_detail = '/app/detail/' + app.app_id
             const appDetail = await reqA('GET', path_detail)
             expect(appDetail.app_report.app_status).to.be.oneOf(['APP_CANCELING', 'APP_CANCELED'])
-
-            // purge the app created
-            sleep(10000)
-            const delete_case = "/app/purge/" + app.app_id
-            await reqA('DELETE', delete_case)
         }).timeout(200000)
     })
 
     context('purge_application', () => {
         it('should purge all applications', async () => {
             // created an app for app_purge
-            sleep(15000)
+            await sleep(15000)
             const chartList = await reqA('GET', '/chart/list', {
                 chart_repo: 'stable'
             })
@@ -566,20 +547,14 @@ describe('DCCN Application Manager', () => {
                 },
                 namespace: {
                     ns_name: 'ns_app_purge_test',
-                    ns_cpu_limit: 101,
-                    ns_mem_limit: 300,
-                    ns_storage_limit: 2
+                    ns_cpu_limit: 1000,
+                    ns_mem_limit: 2000,
+                    ns_storage_limit: 50000
                 }
             })
             
             // wait for app status changed
-            function sleep(delay) {
-                var start = (new Date()).getTime()
-                while((new Date()).getTime() - start < delay) {
-                    continue
-                }
-            }
-            sleep(10000)
+            await sleep(10000)
 
             // purge the app created and check
             const appList = await reqA('GET', '/app/list')
@@ -596,7 +571,7 @@ describe('DCCN Application Manager', () => {
 
     context('delete_all_namespace_created_in_app_test', () => {
         it('should delete a namespace by ns_id', async () => {
-            sleep(30000)
+            await sleep(30000)
 
             const nsList = await reqA('GET', '/namespace/list')
             for (i = 0; i < nsList.ns_reports.length; i++){
