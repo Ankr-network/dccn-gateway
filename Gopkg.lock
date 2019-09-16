@@ -3,12 +3,13 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:b0d8439fc1e5b8e905b007f0e06a0e3283be0e709052aae3c95043d71afb326b"
+  digest = "1:4acbe9a7535f3aca034184a4b7f2ca327504befb62ddf083a7c28f3e5a10e11d"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     "protos/common",
     "protos/gateway/dcmgr/v1",
     "protos/gateway/logmgr/v1",
+    "protos/gateway/payr/v1",
     "protos/gateway/taskmgr/v1",
     "protos/gateway/teammgr/v1",
     "protos/gateway/usermgr/v1",
@@ -167,6 +168,7 @@
   input-imports = [
     "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1",
+    "github.com/Ankr-network/dccn-common/protos/gateway/payr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1",
     "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1",
