@@ -14,6 +14,7 @@ import (
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
 	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
 	gwteammgr "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1"
+	gwpayr "github.com/Ankr-network/dccn-common/protos/gateway/payr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -117,6 +118,15 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 	}
 
 	err = gwteammgr.RegisterTeamMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+	err = gwpayr.RegisterPayrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+
+	err = gwpayr.RegisterPayrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
 	if err != nil {
 		return nil, err
 	}
