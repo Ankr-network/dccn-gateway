@@ -46,7 +46,7 @@
   version = "v1.3.2"
 
 [[projects]]
-  digest = "1:3b341cd71012c63aacddabfc70b9110be8e30c553349552ad3f77242843f2d03"
+  digest = "1:99a9eab89cf8193a246811614678f34432e95446c34142594c450acb1a7a31cc"
   name = "github.com/grpc-ecosystem/grpc-gateway"
   packages = [
     "internal",
@@ -54,8 +54,8 @@
     "utilities",
   ]
   pruneopts = "UT"
-  revision = "fd2d159495beeea56e2b747d3d4b68299a81210c"
-  version = "v1.9.6"
+  revision = "471f45a5a99a578de7a8638dc7ed29e245bde097"
+  version = "v1.11.1"
 
 [[projects]]
   branch = "master"
@@ -120,7 +120,7 @@
   revision = "24fa4b261c55da65468f2abfdae2b024eef27dfb"
 
 [[projects]]
-  digest = "1:3b97661db2e5d4c87f7345e875ea28f911e54c715ba0a74be08e1649d67e05cd"
+  digest = "1:2e18183989c76d073e9088f1a56f8b1c46ca920b74b529a50c2d7e5877ff18ac"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -158,8 +158,8 @@
     "tap",
   ]
   pruneopts = "UT"
-  revision = "6eaf6f47437a6b4e2153a190160ef39a92c7eceb"
-  version = "v1.23.0"
+  revision = "39e8a7b072a67ca2a75f57fa2e0d50995f5b22f6"
+  version = "v1.23.1"
 
 [solve-meta]
   analyzer-name = "dep"
