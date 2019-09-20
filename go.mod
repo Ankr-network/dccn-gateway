@@ -3,7 +3,7 @@ module github.com/Ankr-network/dccn-gateway
 go 1.13
 
 require (
-	github.com/Ankr-network/dccn-common v0.0.0-20190917090420-7bf9bdd7d0c1
+	github.com/Ankr-network/dccn-common v0.0.0-20190920023001-8b53c675318b
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/grpc-ecosystem/grpc-gateway v1.11.1
 	golang.org/x/net v0.0.0-20190813141303-74dc4d7220e7
