@@ -11,10 +11,6 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Copy ssh key in the circleci build context
-          command: |
-            cp ${HOME}/.ssh/id_rsa id_rsa
-      - run:
           name: Install AWSCLI
           command: |
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
@@ -55,7 +51,7 @@ jobs:
               K8S_CLUSTER="dev.hub"
             fi
             DOCKER_NAME="dccn-gateway"
-            dep ensure --vendor-only
+
             docker build --build-arg URL_BRANCH=${URL_BRANCH} --no-cache -f Dockerfile -t $DOCKER_NAME:$BRANCH_NAME .
             for TAG in $BRANCH_NAME $SHA1_SHORT $BRANCH_NAME$DATE; do
               docker tag $DOCKER_NAME:$BRANCH_NAME 815280425737.dkr.ecr.us-west-2.amazonaws.com/dccn-gateway:$TAG
@@ -90,7 +86,6 @@ jobs:
       - run:
           name: AppTest
           command: npm test
-
 
 workflows:
   version: 2
