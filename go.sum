@@ -1,6 +1,8 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/Ankr-network/dccn-common v0.0.0-20190920023001-8b53c675318b h1:g6IWAcW21amhxXTRhvcxoFC4pF/0ozLxcPLtLuuJh3M=
 github.com/Ankr-network/dccn-common v0.0.0-20190920023001-8b53c675318b/go.mod h1:WUt3X9WvObUhiLKzv6qb5rueU0URYmk0AHUuQ3shn6E=
+github.com/Ankr-network/dccn-common v0.0.0-20190927030927-6305af69d794 h1:ACo7jB6zu8ljYUqXyeq69qDaDPc0B71Rsgspkg0wd30=
+github.com/Ankr-network/dccn-common v0.0.0-20190927030927-6305af69d794/go.mod h1:WUt3X9WvObUhiLKzv6qb5rueU0URYmk0AHUuQ3shn6E=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
