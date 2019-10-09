@@ -4,6 +4,8 @@ github.com/Ankr-network/dccn-common v0.0.0-20191002020217-b630d29f5609/go.mod h1
 github.com/Ankr-network/dccn-common/broker v0.0.0-20190918110032-ca0348e10ac3/go.mod h1:YCz/CF0yu/iXWYflV4Iy3hL5bSVHGgMAP7YnCNcF5+o=
 github.com/Ankr-network/dccn-notifier v0.0.0-20191009043357-ec9585a4b90c h1:YNSVO+thS/O65D6A3TY/cz8Z129JsrjU9b0OUSahd08=
 github.com/Ankr-network/dccn-notifier v0.0.0-20191009043357-ec9585a4b90c/go.mod h1:nV4z8gPg/Vi3lwg8MGyDUc/xzsLtPJZcUlulsirs/G0=
+github.com/Ankr-network/dccn-notifier v0.0.0-20191009083326-5b3042076995 h1:UoOZV/UHbaQiIRkIH5o139Y9AQeIwmomFvJ+Q/JdbfM=
+github.com/Ankr-network/dccn-notifier v0.0.0-20191009083326-5b3042076995/go.mod h1:Zv6uxvb2tO26k8CogEZYwIFRR42JjW/p8H8gkb6MEc0=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
