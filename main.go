@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"github.com/Ankr-network/dccn-notifier/api/protos/inapp"
 	"log"
 	"net/http"
 	"path"
@@ -130,6 +131,14 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 
 	err = gwinvestmgr.RegisterInvestMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
 	if err != nil {
+		return nil, err
+	}
+
+	if err := inapp.RegisterPublicInAPPHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+
+	if err := inapp.RegisterPublicInAPPHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
 		return nil, err
 	}
 	return mux, nil
