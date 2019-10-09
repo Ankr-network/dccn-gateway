@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/Ankr-network/dccn-common v0.0.0-20191002020217-b630d29f5609
+	github.com/Ankr-network/dccn-notifier v0.0.0-20191009083326-5b3042076995
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/grpc-ecosystem/grpc-gateway v1.11.3
 	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3
