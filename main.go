@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"flag"
 	"github.com/Ankr-network/dccn-notifier/api/protos/inapp"
+	"github.com/Ankr-network/dccn-uaa/api/protos/sms"
+	"github.com/Ankr-network/dccn-uaa/api/protos/totp"
 	"log"
 	"net/http"
 	"path"
@@ -11,13 +13,12 @@ import (
 
 	"google.golang.org/grpc"
 
-	//"google.golang.org/grpc/status"
 	gwdcmgr "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1"
+	gwinvestmgr "github.com/Ankr-network/dccn-common/protos/gateway/investmgr/v1"
 	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
 	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwteammgr "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1"
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
-	gwinvestmgr "github.com/Ankr-network/dccn-common/protos/gateway/investmgr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -137,10 +138,24 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 	if err := inapp.RegisterPublicInAPPHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
 		return nil, err
 	}
-
 	if err := inapp.RegisterPublicInAPPHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
 		return nil, err
 	}
+
+	if err := sms.RegisterPublicSMSHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	if err := sms.RegisterPublicSMSHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+
+	if err := totp.RegisterPublicTOTPHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	if err := totp.RegisterPublicTOTPHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+
 	return mux, nil
 }
 
