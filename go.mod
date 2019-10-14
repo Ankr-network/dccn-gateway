@@ -3,9 +3,9 @@ module github.com/Ankr-network/dccn-gateway
 go 1.13
 
 require (
-	github.com/Ankr-network/dccn-common v0.0.0-20191011053523-b43800d3ecda
+	github.com/Ankr-network/dccn-common v0.0.0-20191014031356-bc5ec3b0eddc
 	github.com/Ankr-network/dccn-notifier v0.0.0-20191013092523-b604226e568f
-	github.com/Ankr-network/dccn-uaa v0.0.0-20191013093146-35dea8e601a3 // indirect
+	github.com/Ankr-network/dccn-uaa v0.0.0-20191014033551-b0ac471464d8 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/grpc-ecosystem/grpc-gateway v1.11.3
 	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3
