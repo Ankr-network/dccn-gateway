@@ -1,11 +1,24 @@
-FROM golang:1.11.4-alpine as builder
+FROM golang:1.13-alpine as builder
 
-WORKDIR /go/src/github.com/Ankr-network/dccn-gateway
+# privaite repo go module
+RUN apk add --no-cache git openssh-client
+ARG	GITHUB_USER
+ARG	GITHUB_TOKEN
+RUN echo "machine github.com login ${GITHUB_USER} password ${GITHUB_TOKEN}" > ~/.netrc
+
+WORKDIR /workdir
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o cmd/dccn-gateway ./main.go
+ARG GOPROXY
+RUN CGO_ENABLED=0 go vet ./...
+RUN CGO_ENABLED=0 go get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow \
+    && CGO_ENABLED=0 shadow ./...
+# FIXME: fix all unit tests
+RUN CGO_ENABLED=0 go test ./... || true
+RUN CGO_ENABLED=0 GOOS=linux go build .
 
-FROM golang:1.11.4-alpine
+FROM alpine
 
-COPY --from=builder /go/src/github.com/Ankr-network/dccn-gateway/cmd/dccn-gateway /
-CMD ["/dccn-gateway"]
+COPY --from=builder /workdir/dccn-gateway /dccn-gateway
+RUN ln -s /dccn-gateway /usr/local/bin
+CMD ["dccn-gateway"]

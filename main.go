@@ -1,19 +1,24 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
+	"github.com/Ankr-network/dccn-notifier/api/protos/inapp"
+	"github.com/Ankr-network/dccn-uaa/api/protos/sms"
+	"github.com/Ankr-network/dccn-uaa/api/protos/totp"
 	"log"
 	"net/http"
 	"path"
 	"strings"
+
 	"google.golang.org/grpc"
-	"encoding/json"
-	//"google.golang.org/grpc/status"
+
 	gwdcmgr "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1"
-	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
-	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
+	gwinvestmgr "github.com/Ankr-network/dccn-common/protos/gateway/investmgr/v1"
 	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
+	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwteammgr "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1"
+	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -31,15 +36,15 @@ var (
 )
 
 type errorBody struct {
-	Err string `json:"Error,omitempty"`
-	Code string `json:"Code,omitempty"`
+	Err    string `json:"Error,omitempty"`
+	Code   string `json:"Code,omitempty"`
 	Method string `json:"Method,omitempty"`
 }
 
 func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime.Marshaler, w http.ResponseWriter, _ *http.Request, err error) {
-    const fallback = `{"error": "failed to marshal error message"}`
+	const fallback = `{"error": "failed to marshal error message"}`
 
-    w.Header().Set("Content-type", marshaler.ContentType())
+	w.Header().Set("Content-type", marshaler.ContentType())
 	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
 	log.Printf(err.Error())
 	log.Printf(grpc.ErrorDesc(err))
@@ -49,23 +54,23 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 		code = "NotFoundError"
 		errors = "This Api is not Implemented"
 	} else {
-	if len(strings.Split(grpc.ErrorDesc(err), ":")) >= 3 {
-		code = strings.Split(grpc.ErrorDesc(err), ":")[1]
-		errors =  strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
+		if len(strings.Split(grpc.ErrorDesc(err), ":")) >= 3 {
+			code = strings.Split(grpc.ErrorDesc(err), ":")[1]
+			errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
 		} else {
-		code = "Invalid Format"
-		errors = "Invalid Format Error" 
+			code = "Invalid Format"
+			errors = "Invalid Format Error"
 		}
 	}
-    jErr := json.NewEncoder(w).Encode(errorBody{
-		Err: errors,
-		Code: code,
+	jErr := json.NewEncoder(w).Encode(errorBody{
+		Err:    errors,
+		Code:   code,
 		Method: strings.Split(grpc.ErrorDesc(err), ":")[0],
-    })
+	})
 
-    if jErr != nil {
-        w.Write([]byte(fallback))
-    }
+	if jErr != nil {
+		w.Write([]byte(fallback))
+	}
 }
 
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
@@ -120,6 +125,37 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 	if err != nil {
 		return nil, err
 	}
+	err = gwinvestmgr.RegisterInvestMgrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+
+	err = gwinvestmgr.RegisterInvestMgrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := inapp.RegisterPublicInAPPHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	if err := inapp.RegisterPublicInAPPHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+
+	if err := sms.RegisterPublicSMSHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	if err := sms.RegisterPublicSMSHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+
+	if err := totp.RegisterPublicTOTPHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	if err := totp.RegisterPublicTOTPHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+
 	return mux, nil
 }
 
