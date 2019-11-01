@@ -10,8 +10,8 @@ describe('DCCN User Manager', () => {
             try{
                 for (var i = 0; i < 8; i++){
                     const loginfo = await req('POST', '/login',{
-                    email: 'ankrtestuser1@mailinator.com',
-                    password: 'Ankr12345678'
+                    email: 'GatewayTest@mailinator.com',
+                    password: 'Ankr@2019'
                 })        
                 console.log(loginfo.user.attributes.value)
                 expect(loginfo.authentication_result.access_token.length).to.be.at.least(0)
