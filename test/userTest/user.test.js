@@ -4,9 +4,9 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-testEmail = 'ankrtestuser1@mailinator.com'
-testPassword = 'Ankr12345678'
-testChangePassword = 'Ankr12345'
+testEmail = 'GatewayTest@mailinator.com'
+testPassword = 'Ankr@2019'
+testChangePassword = 'Ankr@2018'
 
 describe('DCCN User Manager', () => {
     context('change_password',() => {
