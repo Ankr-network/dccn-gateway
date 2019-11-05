@@ -3,7 +3,7 @@ module github.com/Ankr-network/dccn-gateway
 go 1.13
 
 require (
-	github.com/Ankr-network/dccn-common v0.0.0-20191105102126-85a7434daeda
+	github.com/Ankr-network/dccn-common v0.0.0-20191105111315-32439688045a
 	github.com/Ankr-network/dccn-notifier v0.0.0-20191029091222-1fb1e43c7f90
 	github.com/Ankr-network/dccn-teammgr v0.0.0-20191104031732-82857189a7e5
 	github.com/Ankr-network/dccn-uaa v0.0.0-20191015080554-0ca1f3bf57e5
