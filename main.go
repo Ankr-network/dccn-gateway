@@ -3,25 +3,26 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"log"
+	"net/http"
+	"path"
+	"strings"
+
 	"github.com/Ankr-network/dccn-notifier/api/protos/inapp"
 	"github.com/Ankr-network/dccn-teammgr/api/protos/v1alpha/role"
 	"github.com/Ankr-network/dccn-teammgr/api/protos/v1alpha/team"
 	"github.com/Ankr-network/dccn-uaa/api/protos/sms"
 	"github.com/Ankr-network/dccn-uaa/api/protos/totp"
-	"log"
-	"net/http"
-	"path"
-	"strings"
 
 	"google.golang.org/grpc"
 
 	gwdcmgr "github.com/Ankr-network/dccn-common/protos/gateway/dcmgr/v1"
 	gwinvestmgr "github.com/Ankr-network/dccn-common/protos/gateway/investmgr/v1"
 	gwlogmgr "github.com/Ankr-network/dccn-common/protos/gateway/logmgr/v1"
+	gwpayr "github.com/Ankr-network/dccn-common/protos/gateway/payr/v1"
 	gwtaskmgr "github.com/Ankr-network/dccn-common/protos/gateway/taskmgr/v1"
 	gwteammgr "github.com/Ankr-network/dccn-common/protos/gateway/teammgr/v1"
 	gwusermgr "github.com/Ankr-network/dccn-common/protos/gateway/usermgr/v1"
-	gwpayr "github.com/Ankr-network/dccn-common/protos/gateway/payr/v1"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
@@ -201,7 +202,7 @@ func serveSwagger(w http.ResponseWriter, r *http.Request) {
 func preflightHandler(w http.ResponseWriter, r *http.Request) {
 	headers := []string{"Content-Type", "Accept", "authorization"}
 	w.Header().Set("Access-Control-Allow-Headers", strings.Join(headers, ","))
-	methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE"}
+	methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"}
 	w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods, ","))
 	glog.Infof("preflight request for %s", r.URL.Path)
 	return
