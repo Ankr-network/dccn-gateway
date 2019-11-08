@@ -4,7 +4,7 @@ const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised)
 
 const expect = chai.expect
-const GATEWAY = 'https://gateway-stage.dccn.ankr.com'
+const GATEWAY = 'https://gateway-dev.dccn.ankr.com'
 const testEmail = 'test12345@mailinator.com'
 const testPassword = 'test12345'
 const logOn = false

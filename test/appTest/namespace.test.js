@@ -9,7 +9,6 @@ describe('DCCN Namespace Manager', () => {
     context('namespace_create', () => {
         // regular inputs
         it('should create a namespace', async () => {
-
             // case 1: regular inputs
             console.log("case 1: regular inputs")
             const namespace_info = require('commander')
