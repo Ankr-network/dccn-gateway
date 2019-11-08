@@ -35,6 +35,10 @@ describe('DCCN Data Center Manager', () => {
         });
          */
 
+        //"OndemandInstance", "US", "36.7" , "-120.419416", "US"
+        //"SpotInstance","US", "" , "", "US"
+        //"AllInstance", "US", "36.7" , "-120.419416", "IN"
+        //"","US", "36.7" , "-120.419416", "US"
         it('should list data centers with length > 0', async () => {
             const dcList = await reqA('POST', '/dc/listwithfilter', {
                 dclist_filter: {
