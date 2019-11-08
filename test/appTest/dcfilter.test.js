@@ -47,7 +47,7 @@ describe('DCCN Data Center Manager', () => {
                         'countrycode' : '',
                         'latitude' : '36.7',
                         'longitude' : '-120.419416',
-                        'filtercountrycode' : ''
+                        'filtercountrycode' : 'IN'
                     }
                 }
             })

@@ -205,8 +205,6 @@ func preflightHandler(w http.ResponseWriter, r *http.Request) {
 	methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"}
 	w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods, ","))
 	glog.Infof("preflight request for %s", r.URL.Path)
-	remoteaddr := []string{r.RemoteAddr}
-	w.Header().Set("RemoteAddr", strings.Join(remoteaddr, ","))
 	return
 }
 
