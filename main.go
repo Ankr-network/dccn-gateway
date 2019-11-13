@@ -62,6 +62,7 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 			code = strings.Split(grpc.ErrorDesc(err), ":")[1]
 			errors = strings.Join(strings.Split(grpc.ErrorDesc(err), ":")[2:], ":")
 		} else {
+			log.Printf("CustomHTTPError: %+v\n", err)
 			code = "Invalid Format"
 			errors = "Invalid Format Error"
 		}
