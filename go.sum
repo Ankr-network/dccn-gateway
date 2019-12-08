@@ -20,6 +20,10 @@ github.com/Ankr-network/dccn-notifier v0.0.0-20191029091222-1fb1e43c7f90/go.mod 
 github.com/Ankr-network/dccn-payr v0.0.0-20191121030739-a03b53115106 h1:5XB5Y0cZGqZlvgV/65XjhoIjrOMzF03ZH8ihXzzjuQE=
 github.com/Ankr-network/dccn-payr v0.0.0-20191208021959-634fff81ce5d h1:2jEVSODa1+2w0gDFrDrY2DqKZxzign73ENEIqQdqq8s=
 github.com/Ankr-network/dccn-payr v0.0.0-20191208021959-634fff81ce5d/go.mod h1:ctRxLfbCszYpygp4dzJgVc7ELKogwQBepIj2GqfxAYo=
+github.com/Ankr-network/dccn-payr v0.0.0-20191208231658-5097f3c4bb83 h1:ZibIgs+Tg8fwy+cd/IQZqWyx2fjJP9M7Hz5Y58EQ1o8=
+github.com/Ankr-network/dccn-payr v0.0.0-20191208231658-5097f3c4bb83/go.mod h1:ctRxLfbCszYpygp4dzJgVc7ELKogwQBepIj2GqfxAYo=
+github.com/Ankr-network/dccn-payr v0.0.0-20191208231900-c850a626d2b5 h1:pR+B0QbilcyfdutHHwDPyJP2QDqoif8iYWGqdqMZPqk=
+github.com/Ankr-network/dccn-payr v0.0.0-20191208231900-c850a626d2b5/go.mod h1:ctRxLfbCszYpygp4dzJgVc7ELKogwQBepIj2GqfxAYo=
 github.com/Ankr-network/dccn-teammgr v0.0.0-20191105032842-1170f03ce3b7 h1:BSh+SfoixaRWY8BXU+4PQHtL1yQyI2vSSGXthD+/ghI=
 github.com/Ankr-network/dccn-teammgr v0.0.0-20191105032842-1170f03ce3b7/go.mod h1:98FkvVEwaxlc668HMK0S8CxlMDjV/+pp3tT2ScV2n1s=
 github.com/Ankr-network/dccn-teammgr v0.0.0-20191121030406-2db2d6fe343a h1:LlPKkgGo32STWmRJ1U57TgN/HeP+5GrP+IYjHKn3E+c=
