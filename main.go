@@ -11,6 +11,7 @@ import (
 	"github.com/Ankr-network/dccn-notifier/api/protos/inapp"
 	"github.com/Ankr-network/dccn-teammgr/api/protos/v1alpha/role"
 	"github.com/Ankr-network/dccn-teammgr/api/protos/v1alpha/team"
+	"github.com/Ankr-network/dccn-payr/api/protos/v1alpha/payr"
 	"github.com/Ankr-network/dccn-uaa/api/protos/sms"
 	"github.com/Ankr-network/dccn-uaa/api/protos/totp"
 
@@ -174,6 +175,13 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 		return nil, err
 	}
 	if err := team.RegisterPublicTeamHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	
+	if err := payr.RegisterPublicPayrHandlerFromEndpoint(ctx, mux, *getEndpoint, dialOpts); err != nil {
+		return nil, err
+	}
+	if err := payr.RegisterPublicPayrHandlerFromEndpoint(ctx, mux, *postEndpoint, dialOpts); err != nil {
 		return nil, err
 	}
 
