@@ -12,6 +12,8 @@ github.com/Ankr-network/dccn-common v0.0.0-20191212063423-7dfaa3b35a56 h1:hOD1DW
 github.com/Ankr-network/dccn-common v0.0.0-20191212063423-7dfaa3b35a56/go.mod h1:WUt3X9WvObUhiLKzv6qb5rueU0URYmk0AHUuQ3shn6E=
 github.com/Ankr-network/dccn-common v0.0.0-20191212073240-20165e1b1fe6 h1:fzoteVl0HVrI24bF0xSxDDXf7amy7fDQOYUnrzH9CmA=
 github.com/Ankr-network/dccn-common v0.0.0-20191212073240-20165e1b1fe6/go.mod h1:WUt3X9WvObUhiLKzv6qb5rueU0URYmk0AHUuQ3shn6E=
+github.com/Ankr-network/dccn-common v0.0.0-20191213015458-f760eb4eb64c h1:lafuDsGbswRzAKyJC2F+rx3/HDQJ/YlrTn5dPwuZyM8=
+github.com/Ankr-network/dccn-common v0.0.0-20191213015458-f760eb4eb64c/go.mod h1:WUt3X9WvObUhiLKzv6qb5rueU0URYmk0AHUuQ3shn6E=
 github.com/Ankr-network/dccn-common/broker v0.0.0-20190918110032-ca0348e10ac3/go.mod h1:YCz/CF0yu/iXWYflV4Iy3hL5bSVHGgMAP7YnCNcF5+o=
 github.com/Ankr-network/dccn-common/broker v0.0.0-20191010030113-26e5b35200ef/go.mod h1:YCz/CF0yu/iXWYflV4Iy3hL5bSVHGgMAP7YnCNcF5+o=
 github.com/Ankr-network/dccn-common/broker v0.0.0-20191025090312-9e845243b14a/go.mod h1:bqbEkIlAfU2uVu+NS/lF0UtaS2gnoxwpn6ng0wqvTkY=
