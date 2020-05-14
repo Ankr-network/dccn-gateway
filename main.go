@@ -11,8 +11,8 @@ import (
 	"github.com/Ankr-network/dccn-notifier/api/protos/inapp"
 	"github.com/Ankr-network/dccn-teammgr/api/protos/v1alpha/role"
 	"github.com/Ankr-network/dccn-teammgr/api/protos/v1alpha/team"
-	"github.com/Ankr-network/dccn-uaa/api/protos/sms"
-	"github.com/Ankr-network/dccn-uaa/api/protos/totp"
+	"github.com/Ankr-network/dccn-uaa/api/protos/sms/v1alpha"
+	"github.com/Ankr-network/dccn-uaa/api/protos/totp/v1alpha"
 
 	"google.golang.org/grpc"
 
